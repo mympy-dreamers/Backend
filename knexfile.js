@@ -12,7 +12,15 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection:"postgresql://localhost:5432/mympy"
+    connection:"postgresql://localhost:5432/mympy",
+    database:'mympy',
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: {
+      directory: './data/seeds'
+    },
+    useNullAsDefault: true,
   },
 
   // staging: {
