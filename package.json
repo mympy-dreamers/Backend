@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/mympy-dreamers/Backend#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.18.3",
