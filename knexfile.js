@@ -12,7 +12,7 @@ const pgDev = localPG(process.env.DB_DEV);
 
 const dbSettings = (connection) => ({
   client: 'pg',
-  connection,
+  connection: connection,
   pool: {
     min: 2,
     max: 10
