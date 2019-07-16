@@ -4,7 +4,7 @@ const restricted = require('../auth/restricted-middleware.js');
 const checkRole = require('../auth/check-role-middleware.js');
 
 
-router.get('/', restricted, (req, res) => {
+router.get('/', (req, res) => {
   Users.get()
     .then(users => {
       res.status(200).json(users);
