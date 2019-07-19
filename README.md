@@ -6,7 +6,7 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### 1️⃣ Backend deployed at [🚫name service here](🚫add URL here) <br>
 
 ## 1️⃣ Getting started
 
@@ -21,100 +21,96 @@ To get the server running locally:
 
 ### Backend framework goes here
 
-🚫 Why did you choose this framework?
+Accessibility and clarity comes with route specifications, therefore it's easier to have the server route to to the following:
 
--    Point One
--    Point Two
--    Point Three
--    Point Four
+## 2️⃣ Endpoints:
 
-## 2️⃣ Endpoints
+`${server}/api/dreams`
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+`${server}/api/user`
 
-#### Organization Routes
+## Object Outputs:
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+### Dreams:
+
+    {
+      id: INTEGER (PK++),
+      dream_name: VARCHAR 128,
+      dream_short_description: TEXT,
+      dream_long_description: TEXT,
+      donations_received: INTEGER 128,
+      user_id: INT (FK),
+      dreampic: VARCHAR
+    }
+
+### Users:
+
+    {
+      id: INTEGER (PK++),
+      username: VARCHAR 128,
+      password: VARCHAR 128,
+      email: VARCHAR 128
+    }
+
+### UserBio:
+
+    {
+      id: INTEGER (PK++)
+      first_name: VARCHAR 128,
+      last_name: VARCHAR 128,
+      bio: TEXT,
+      city: VARCHAR 128,
+      state: VARCHAR 128,
+      profile_pic: VARCHAR,
+      user_id: INTEGER (FK)
+    }
+
+
+#### Dreams Routes
+
+| Method | Endpoint                | Access Control | Description                       |
+| ------ | ----------------------- | -------------- | ----------------------------------|
+| GET    | `/`                     | all users      | Returns info for a dream project. |
+| PUT    | `/:id`                  | restricted     | Modify an existing dream project. |
+| DELETE | `/:id`                  | restricted     | Delete a dream.                   |
+| POST   | `/`                     | restricted     | Post a new dream project.         |
 
 #### User Routes
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| GET    | `/`                     | restricted          | Returns all users for an dream.             |
+| GET    | `/:id          `        | restricted          | Returns info for a single user.                    |
+| GET    | `/:id/dreams          ` | restricted          | Dreams belonging to a specific user.               |
+| PUT    | `/:id`                  | restricted          | Edit a user's information.                         |
+| DELETE | `/:id`                  | restricted          | Delete a user's information.                       |
 
-# Data Model
-
-🚫This is just an example. Replace this with your data model
-
-#### 2️⃣ ORGANIZATIONS
-
----
-
-```
-{
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
-```
-
-#### USERS
-
----
-
-```
-{
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
-}
-```
 
 ## 2️⃣ Actions
 
-🚫 This is an example, replace this with the actions that pertain to your backend
+`getDreams()` -> Returns all dreams
 
-`getOrgs()` -> Returns all organizations
+`getDreams(id)` -> Returns a single dream by ID
 
-`getOrg(orgId)` -> Returns a single organization by ID
+`addDream(dream)` -> Returns the created dreams
 
-`addOrg(org)` -> Returns the created org
+`updateDreams(id, changes)` -> Update a dream by ID
 
-`updateOrg(orgId)` -> Update an organization by ID
+`deleteDreams(id)` -> Delete an dream by ID
 
-`deleteOrg(orgId)` -> Delete an organization by ID
 <br>
 <br>
 <br>
-`getUsers(orgId)` -> if no param all users
 
-`getUser(userId)` -> Returns a single user by user ID
+`getUsers(id)` -> if no param all users
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+`getUser(id)` -> Returns a single user by user ID
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+`addUser(userObject)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their dream.
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+`updateUser(id, changes)` -> Updates a single user by ID.
+
+`deleteUser(id)` -> deletes everything dependent on the user
 
 ## 3️⃣ Environment Variables
 
