@@ -137,13 +137,17 @@ The list of user objects will output added properties `userInfo` and `dreams`. B
 
 ## 2️⃣ Actions
 
+### Notes:
+
+There will be different logic for both types of get requests (for a single user and for all users) due to adding the `dreams` and `userInfo` properties.
+
 ### Dreams:
 
 #### getDreams()
 
 - Returns all dreams
 
-#### getDreams(id)
+#### getDream(id)
 
 - Returns a single dream by ID
 
@@ -163,7 +167,7 @@ The list of user objects will output added properties `userInfo` and `dreams`. B
 
 ### Users:
 
-#### getUsers(id)
+#### getUsers()
 
 - Returns all users with added table properties of `dreams` and `userInfo`.
 
