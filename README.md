@@ -21,17 +21,20 @@ To get the server running locally:
 
 ### Backend framework goes here
 
-Accessibility and clarity comes with route specifications, therefore it's easier to have the server route to to the following:
+Accessibility and clarity comes with route specifications, therefore it's easier to have the server route to the following:
 
-## 2️⃣ Endpoints:
+## 2️⃣ POST Endpoints:
+
+The following are required fields in order to successfully POST to specified urls:
+
+### Dreams:
+
+#### Notes:
+
+`dreampic` requires additional logic and research (cloudinary) to be able to add images to the database.
 
 `${server}/api/dreams`
 
-`${server}/api/user`
-
-## Object Outputs:
-
-### Dreams:
 
     {
       id: INTEGER (PK++),
@@ -45,6 +48,8 @@ Accessibility and clarity comes with route specifications, therefore it's easier
 
 ### Users:
 
+`${server}/api/user`
+
     {
       id: INTEGER (PK++),
       username: VARCHAR 128,
@@ -52,7 +57,9 @@ Accessibility and clarity comes with route specifications, therefore it's easier
       email: VARCHAR 128
     }
 
-### UserBio:
+`${server}/api/user-info`
+
+### User Info:
 
     {
       id: INTEGER (PK++)
@@ -63,6 +70,48 @@ Accessibility and clarity comes with route specifications, therefore it's easier
       state: VARCHAR 128,
       profile_pic: VARCHAR,
       user_id: INTEGER (FK)
+    }
+
+## GET Endpoints
+
+The following outputs will differ from the post schema previously stated:
+
+### Users:
+
+`${server}/api/user`
+
+#### Notes:
+
+The list of user objects will output added properties `userInfo` and `dreams`. Both are connected through the associated tables (by joins, foreign keys, and promise logic).
+
+
+
+    {
+      id: INTEGER (PK++),
+      username: VARCHAR 128,
+      password: VARCHAR 128,
+      email: VARCHAR 128,
+      userInfo: {
+                  id: INTEGER (PK++)
+                  first_name: VARCHAR 128,
+                  last_name: VARCHAR 128,
+                  bio: TEXT,
+                  city: VARCHAR 128,
+                  state: VARCHAR 128,
+                  profile_pic: VARCHAR,
+                  user_id: INTEGER (FK)
+                },
+      dreams: [
+                {
+                  id: INTEGER (PK++),
+                  dream_name: VARCHAR 128,
+                  dream_short_description: TEXT,
+                  dream_long_description: TEXT,
+                  donations_received: INTEGER 128,
+                  user_id: INT (FK),
+                  dreampic: VARCHAR
+                }
+              ]
     }
 
 
@@ -88,29 +137,59 @@ Accessibility and clarity comes with route specifications, therefore it's easier
 
 ## 2️⃣ Actions
 
-`getDreams()` -> Returns all dreams
+### Dreams:
 
-`getDreams(id)` -> Returns a single dream by ID
+#### getDreams()
 
-`addDream(dream)` -> Returns the created dreams
+- Returns all dreams
 
-`updateDreams(id, changes)` -> Update a dream by ID
+#### getDreams(id)
 
-`deleteDreams(id)` -> Delete an dream by ID
+- Returns a single dream by ID
 
-<br>
-<br>
-<br>
+#### addDream(dream)
 
-`getUsers(id)` -> if no param all users
+- Adds the request into the database
 
-`getUser(id)` -> Returns a single user by user ID
+#### updateDreams(id, changes)
 
-`addUser(userObject)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their dream.
+- Update a dream by ID
 
-`updateUser(id, changes)` -> Updates a single user by ID.
+#### deleteDreams(id)
 
-`deleteUser(id)` -> deletes everything dependent on the user
+- Delete a dream by ID
+
+
+
+### Users:
+
+#### getUsers(id)
+
+- Returns all users with added table properties of `dreams` and `userInfo`.
+
+#### getUser(id)
+
+- Returns the user with linked `dreams` and `userInfo` properties.
+
+#### getUserDreams(id)
+
+- Returns the list of associated dreams with user-specific id. 
+ * This will just be a filtered array of dreams only pertaining to the specified user.
+ * The route would be `/:id/dreams`
+
+#### addUser(userObject)
+
+- Creates a new user and returns that user. 
+
+#### updateUser(id, changes)
+
+- Updates a single user by ID.
+- Changes to the password must include hash logic, similar to login logic.
+
+#### deleteUser(id)
+
+- deletes specified user object on CASCADE.
+
 
 ## 3️⃣ Environment Variables
 
