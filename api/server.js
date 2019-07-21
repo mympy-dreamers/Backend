@@ -53,7 +53,6 @@ server.use(passport.initialize());
 server.use(passport.session());
 server.use(userInViews());
 server.use('/', authRouters);
-server.use('/', indexRouter);
 server.use('/', usersRouter);
 
 if (server.get("env") === "production") {
