@@ -117,12 +117,13 @@ The list of user objects will output added properties `userInfo` and `dreams`. B
 
 #### Dreams Routes
 
-| Method | Endpoint                | Access Control | Description                       |
-| ------ | ----------------------- | -------------- | ----------------------------------|
-| GET    | `/`                     | all users      | Returns info for a dream project. |
-| PUT    | `/:id`                  | restricted     | Modify an existing dream project. |
-| DELETE | `/:id`                  | restricted     | Delete a dream.                   |
-| POST   | `/`                     | restricted     | Post a new dream project.         |
+| Method | Endpoint                | Access Control | Description                          |
+| ------ | ----------------------- | -------------- | -------------------------------------|
+| GET    | `/`                     | all users      | Returns info for all dream projects. |
+| GET    | `/:id`                  | all users      | Returns info for a dream project.    |
+| PUT    | `/:id`                  | restricted     | Modify an existing dream project.    |
+| DELETE | `/:id`                  | restricted     | Delete a dream.                      |
+| POST   | `/`                     | restricted     | Post a new dream project.            |
 
 #### User Routes
 
