@@ -4,7 +4,7 @@ const server = express();
 
 const authRouter = require('./auth/signUp-router.js');
 const userRouter = require('./users/users-router.js');
-const dreamsRouter = require('../dreams/dreams-router')
+const dreamsRouter = require('./dreams/dreams-router')
 
 server.use(cors());
 server.use(express.json());
