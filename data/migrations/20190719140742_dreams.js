@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
         
           
         tbl
-          .varchar("dream_name")
+          .varchar("dream_name", 128)
           .notNullable()
          
           
