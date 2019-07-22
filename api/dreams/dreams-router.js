@@ -7,7 +7,7 @@ module.exports = router;
 router.get('/:id', getDreamById);
 router.post('/', addDream);
 
-function getDreamById(req, res) {
+function getDreamById(req, res) {  //fetches dream by dream id
     const id = req.params.id;
     dreamsModel.getDreamById(id)
         .then(dream => {
@@ -18,8 +18,8 @@ function getDreamById(req, res) {
         })
 }
 
-function addDream(req, res) {
-    let { dream_name, dream_short_description, dream_long_description } = req.body
+function addDream(req, res) { //adds dream to list of dream
+    let { dream_name, dream_short_description, dream_long_description } = req.body // checks to make sure name and both descriptions are added
     if (!dream_name || !dream_short_description || !dream_long_description) {
         return res
             .status(400)
