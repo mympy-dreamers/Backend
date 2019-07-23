@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function get(id) {
-    let query = db('user');
+    let query = db('users');
 
     if (id) {
         return query
@@ -20,7 +20,7 @@ function get(id) {
 }
 
 function login(username) {
-    let query = db('user').select('username', 'id', 'password', 'email');
+    let query = db('users').select('username', 'id', 'password', 'email');
 
     return query
         .where('username', username)
@@ -29,7 +29,7 @@ function login(username) {
 
 function add(user) {
 
-    return db('user')
+    return db('users')
         .insert(user);
 
 }
