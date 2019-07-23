@@ -16,22 +16,23 @@ exports.up = function (knex, Promise) {
 
       tbl
         .text("dream_long_description")
-        .notNullable()
 
       tbl
         .integer("donations_received", 128)
         .notNullable()
+      tbl
+        .integer("donation_goal")
+        .notNullable()
 
       tbl
         .varchar("dreampic")
-        .notNullable()
 
       tbl
         .integer("user_id")
         .unsigned()
         .notNullable()
         .references("id")
-        .inTable("user")
+        .inTable("users")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
 
