@@ -1,7 +1,7 @@
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex
-  .raw("TRUNCATE TABLE dreams RESTART IDENTITY CASCADE")
+  return knex("dreams")
+      .del()
       .then(function() {
       // Inserts seed entries
       return knex("dreams").insert([
@@ -19,7 +19,7 @@ exports.seed = function(knex, Promise) {
           dream_long_description: "Let save all those rare fish and animals for future generatio",
           donations_received: 230,
           dreampic: "www.sea.com/fish.jpg",
-          user_id: 1
+          user_id: 2
         },        
         {
           dream_name: "abc",
@@ -27,7 +27,7 @@ exports.seed = function(knex, Promise) {
           dream_long_description: "testing",
           donations_received: 20,
           dreampic: "url",
-          user_id: 2
+          user_id: 1
         }
       ]);
     });
