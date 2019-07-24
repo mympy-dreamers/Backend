@@ -2,23 +2,44 @@ const router = require('express').Router();
 const Users = require('./users-model.js');
 const restricted = require('../auth/restricted-middleware.js');
 const checkRole = require('../auth/check-role-middleware.js');
+const bcrypt = require('bcryptjs');
 
 
-router.get('/', (req, res) => {
-  Users.get()
-    .then(users => {
-      res.status(200).json(users);
-    })
-    .catch(err => res.send(err));
-});
+module.exports = router => {
+  router.put('/api/users', restricted, updateUser);
+  router.delete('/api/users', restricted, deleteUser);
+};
 
-router.get('/:id', restricted, (req, res) => {
-  const id = req.params.id;
-  Users.get(id)
-    .then(user => {
-      res.status(200).json(user);
-    })
-    .catch(err => res.send(err));
-});
+const updateUser = async (req, res) => {
+  try {
+      const { id } = req.params;
+      let newUser = req.body;
 
-module.exports = router;
+      const hash = bcrypt.hashSync(newUser.password, 10);
+      newUser.password = hash;
+
+      const updateUser = await Users.update(id, req.body);
+
+      updateUser 
+      ? res.status(200).json({ message: 'successfully updated credentials' }) 
+      : res.status(404).json({ message: 'missing required fields' })
+  } catch(err) {
+      res.status(500).json({ success: false, err })
+  }
+}
+
+const deleteUser = async (req, res) => {
+  try {
+      const { id } = req.params;
+      const success = await Users.remove(id);
+      
+      success ?
+       res.status(204).end() : res.status(404).end();
+  } catch(err) {
+      res.status(500).json({ success: false, err })
+  }
+}
+
+
+
+
