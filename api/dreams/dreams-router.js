@@ -9,7 +9,7 @@ router.get('/:id', getDreamById);
 router.post('/', addDream);
 
 
-function getDreams(req, res) {  //fetches dream by dream id
+function getDreams(req, res) {  //fetches all dreams in dreams db
     dreamsModel.getDreams()
         .then(dreams => {
             res.status(200).json(dreams)
