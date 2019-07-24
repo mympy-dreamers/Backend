@@ -2,9 +2,10 @@ const db = require('../../data/dbConfig.js');
 
 module.exports = {
     get,
-    add,
+    register,
     login,
     remove,
+    update
 }
 
 function get(id) {
@@ -27,13 +28,19 @@ function login(username) {
         .first()
 }
 
-function add(user) {
+function register(newUser) {
+    return db('users')
+    .insert(newUser)
+}
 
-    return db('user')
-        .insert(user);
-
+function update(id, changes) {
+    return db('users')
+    .where({ id })
+    .update(changes, '*')
 }
 
 function remove(id) {
-    return null;
+    return db('users')
+    .where({ id })
+    .del();
 }
