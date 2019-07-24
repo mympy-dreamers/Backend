@@ -5,12 +5,11 @@ module.exports = {
     add,
     login,
     remove,
-    register,
     update
 }
 
 function get(id) {
-    let query = db('user');
+    let query = db('users');
 
     if (id) {
         return query
@@ -22,14 +21,14 @@ function get(id) {
 }
 
 function login(username) {
-    let query = db('user').select('username', 'id', 'password', 'email');
+    let query = db('users').select('username', 'id', 'password', 'email');
 
     return query
         .where('username', username)
         .first()
 }
 
-async function register(newUser) {
+async function add(newUser) {
     const [id] = await db('users').insert(newUser);
     
     return findById(id);
