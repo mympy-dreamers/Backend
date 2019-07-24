@@ -2,7 +2,12 @@ const db = require('../../data/dbConfig');
 
 module.exports = {
     addDream,
-    getDreamById
+    getDreamById,
+    getDreams
+}
+
+function getDreams() {
+    return db('dreams')
 }
 
 function getDreamById(id) {
