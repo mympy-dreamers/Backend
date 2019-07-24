@@ -1,0 +1,38 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.",
+    "main": "index.js",
+    "scripts": {
+        "test": "cross-env DB_ENV=testing jest --watch",
+        "server": "nodemon index.js",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mympy-dreamers/Backend.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/mympy-dreamers/Backend/issues"
+    },
+    "homepage": "https://github.com/mympy-dreamers/Backend#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^8.0.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "knex": "^0.19.0",
+        "node": "^12.6.0",
+        "pg": "^7.11.0"
+    },
+    "devDependencies": {
+        "cross-env": "^5.2.0",
+        "jest": "^24.8.0",
+        "nodemon": "^1.19.1",
+        "supertest": "^4.0.2"
+    }
+}
