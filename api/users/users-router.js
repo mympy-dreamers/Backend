@@ -6,8 +6,8 @@ const bcrypt = require('bcryptjs');
 
 
 module.exports = router => {
-  router.put('/api/users', restricted, updateUser);
-  router.delete('/api/users', restricted, deleteUser);
+  router.put('/api/user', restricted, updateUser);
+  router.delete('/api/user', restricted, deleteUser);
 };
 
 const updateUser = async (req, res) => {
