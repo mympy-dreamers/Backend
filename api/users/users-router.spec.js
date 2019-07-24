@@ -13,7 +13,7 @@ describe('users router', () => {
         });
         it('should respond with 404 not found with non-existent id', () => {
             supertest(router)
-                .put('/7')
+                .put('/30')
                 .expect(404)
                 .expect('Content-Type', /json/i);
         });
@@ -26,7 +26,7 @@ describe('users router', () => {
         });
         it('should respond with 404 not found with non-existent id', () => {
             supertest(router)
-                .delete('/7')
+                .delete('/30')
                 .expect(404)
         });
     });
