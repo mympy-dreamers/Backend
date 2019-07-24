@@ -20,7 +20,7 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   let { username, password } = req.body;
-
+  if (!username) res.status(401).send({ error: "No Username Provided!" })
   Users.login(username)
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
