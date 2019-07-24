@@ -4,8 +4,20 @@ const dreamsModel = require('./dreams-model');
 
 module.exports = router;
 
+router.get('/', getDreams)
 router.get('/:id', getDreamById);
 router.post('/', addDream);
+
+
+function getDreams(req, res) {  //fetches dream by dream id
+    dreamsModel.getDreams()
+        .then(dreams => {
+            res.status(200).json(dreams)
+        })
+        .catch(error => {
+            res.status(400).json(error)
+        })
+}
 
 function getDreamById(req, res) {  //fetches dream by dream id
     const id = req.params.id;
