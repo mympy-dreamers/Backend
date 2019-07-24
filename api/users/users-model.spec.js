@@ -7,6 +7,9 @@ describe('users model', () => {
     beforeEach(async () => {
         await db('users').truncate();
       });
+    it('should set environment to testing', () => {
+        expect(process.env.DB_ENV).toBe('testing');
+    });
     describe('put request, update()', async () => {
         it('should return updated content with changes', async () => {
 
