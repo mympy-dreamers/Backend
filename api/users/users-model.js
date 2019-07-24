@@ -5,6 +5,8 @@ module.exports = {
     add,
     login,
     remove,
+    register,
+    update
 }
 
 function get(id) {
@@ -27,13 +29,26 @@ function login(username) {
         .first()
 }
 
-// function add(user) {
+async function register(newUser) {
+    const [id] = await db('users').insert(newUser);
+    
+    return findById(id);
+}
 
-//     return db('user')
-//         .insert(user);
+function findById(id) {
+    return db('users')
+    .where({ id })
+    .first()
+}
 
-// }
+function update(id, changes) {
+    return db('users')
+    .where({ id })
+    .update(changes, '*')
+}
 
-// function remove(id) {
-//     return null;
-// }
+function remove(id) {
+    return db('users')
+    .where({ id })
+    .del();
+}
