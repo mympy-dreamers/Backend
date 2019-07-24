@@ -6,8 +6,8 @@ const { login, add } = require('../users/users-model')
 
 describe('dreams model', () => {
     beforeEach(async () => {
-        await db('dreams').truncate();
-        await db('user').truncate();
+        await db.raw("TRUNCATE TABLE dreams RESTART IDENTITY CASCADE");
+        /* await db('users').del(); */
     });
 
     it('should set testing env variable', () => {
@@ -17,24 +17,25 @@ describe('dreams model', () => {
     describe('addDream()', () => {
         it('should add a dream to the dreams db', async () => {
 
-            await add({
-                "username": "test",
-                "password": "test",
-                "email": "test@test.com"
-            })
-
-            await login({
-                "username": "test",
-                "password": "test"
-            })
+            /*  await add({
+                 "username": "test",
+                 "password": "test",
+                 "email": "test@test.com"
+             })
+ 
+             await login({
+                 "username": "test",
+                 "password": "test"
+             }) */
 
             await addDream({
                 "dream_name": "test_dream",
                 "dream_short_description": "test test. test test test test test test test test test!",
                 "dream_long_description": "test test. test test test test test test test test test! test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!",
                 "donations_received": 1,
+                "donation_goal": 100,
                 "dreampic": "test_string",
-                "user_id": 4
+                "user_id": 1
             })
 
             const dreams = await db('dreams')
@@ -45,29 +46,32 @@ describe('dreams model', () => {
 
     describe('getDreamById()', () => {
         it('should return one dream when a dream is added and retrieved using getDreamById()', async () => {
-            await add({
-                "username": "test",
-                "password": "test",
-                "email": "test@test.com"
-            })
+            /*  await add({
+                 "username": "test",
+                 "password": "test",
+                 "email": "test@test.com"
+             })
+ 
+             await login({
+                 "username": "test",
+                 "password": "test"
+             }) */
 
-            await login({
-                "username": "test",
-                "password": "test"
-            })
-
-            await addDream({
+            const [newDream] = await addDream({ // putting brackets around newDream tells us the id of that new dream
                 "dream_name": "test_dream",
                 "dream_short_description": "test test. test test test test test test test test test!",
                 "dream_long_description": "test test. test test test test test test test test test! test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!",
+                "donation_goal": 100,
                 "donations_received": 1,
                 "dreampic": "test_string",
-                "user_id": 4
+                "user_id": 1
             })
 
-            const dreamById = await getDreamById(1) // will this work
+            console.log("newdream", newDream);
 
-            expect(dreamById).toHaveLength(1)
+            const dreamById = await getDreamById(newDream) // tests regardless of id of dream
+
+            expect(dreamById).toBeTruthy()
         })
     })
 
