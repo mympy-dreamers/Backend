@@ -30,6 +30,7 @@ function getDreamById(req, res) {  //fetches dream by dream id
         })
 }
 
+
 function addDream(req, res) { //adds dream to list of dream
     let { dream_name, dream_short_description, dream_long_description } = req.body // checks to make sure name and both descriptions are added
     if (!dream_name || !dream_short_description || !dream_long_description) {
