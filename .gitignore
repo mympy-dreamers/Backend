@@ -13,3 +13,4 @@ yarn.lock
 package-lock.json
 *.json
 package-lock.json
+package.json
