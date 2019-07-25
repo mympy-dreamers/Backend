@@ -28,6 +28,10 @@ function login(username) {
         .first()
 }
 
+function get() {
+    return db('user_roles');
+}
+
 async function add(newUser) {
     const [id] = await db('users').insert(newUser);
     
