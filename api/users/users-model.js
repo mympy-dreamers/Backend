@@ -29,7 +29,7 @@ function login(username) {
 }
 
 function get() {
-    return db('user_roles');
+    return db('users');
 }
 
 async function add(newUser) {
