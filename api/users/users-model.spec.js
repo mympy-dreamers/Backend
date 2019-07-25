@@ -1,4 +1,4 @@
-const db = require('../data/dbConfig.js');
+const db = require('../../data/dbConfig');
 const bcrypt = require('bcryptjs');
 
 const { update, remove, add, findById } = require('./users-model');
