@@ -5,10 +5,10 @@ const checkRole = require('../auth/check-role-middleware.js');
 const bcrypt = require('bcryptjs');
 
 
-module.exports = router;
-
-router.put('/:id', restricted, updateUser);
-router.delete('/:id', restricted, deleteUser);
+module.exports = router => {
+  router.delete('/:id', deleteUser)
+  router.put('/:id', updateUser)
+}
 
 const updateUser = async (req, res) => {
   try {
