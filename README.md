@@ -51,7 +51,7 @@ The following are required fields in order to successfully POST to specified url
 
 ### Users:
 
-`${server}/api/user`
+`${server}/api/users`
 
     {
       id: INTEGER (PK++),
@@ -81,7 +81,7 @@ The following outputs will differ from the post schema previously stated:
 
 ### Users:
 
-`${server}/api/user`
+`${server}/api/users`
 
 #### Notes:
 
