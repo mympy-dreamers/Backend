@@ -1,4 +1,4 @@
-const userDB = require('../models/users-model');
+const userDB = require('./users-model');
 
 module.exports = {
     validateUserId: async (req, res, next) => {
