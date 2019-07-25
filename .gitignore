@@ -11,7 +11,6 @@ jspm_packages/
 
 yarn.lock
 package-lock.json
-*.json
-package-lock.json
 package.json
 *.json
+knexfile.js
