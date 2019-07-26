@@ -1,6 +1,6 @@
 const db = require('../../data/dbConfig.js');
 
-const { getDreamById, getDreams, addDream } = require('./dreams-model.js');
+const { getDreamById, getDreams, addDream, updateDream, removeDream } = require('./dreams-model.js');
 
 describe('dreams model', () => {
     beforeEach(async () => {
@@ -163,5 +163,24 @@ describe('dreams model', () => {
             expect(dreamById).toBeTruthy()
         })
     })
+    describe('put request, update()', async () => {
+        it('should return updated content with changes', async () => {
+
+            await addDream({ 
+                "dream_name": "test_dream",
+                "dream_short_description": "test test. test test test test test test test test test!",
+                "dream_long_description": "test test. test test test test test test test test test! test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!",
+                "donation_goal": 100,
+                "donations_received": 1,
+                "dreampic": "test_string",
+                "user_id": 1
+            });
+            await updateDream(1, { dream_name: 'PAAAATRICK' });
+
+            const dream = await getDreamById(1);
+
+            expect(dream.dream_name).toBe('PAAAATRICK');
+        });
+    });
 
 })

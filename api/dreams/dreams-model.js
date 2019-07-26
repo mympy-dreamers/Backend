@@ -4,8 +4,8 @@ module.exports = {
     addDream,
     getDreamById,
     getDreams,
-    update,
-    remove
+    updateDream,
+    removeDream
 }
 
 function getDreams() {
@@ -29,14 +29,14 @@ function addDream(dream) {
         .insert(dream, 'id')
 }
 
-function update(id, changes) {
-    return db('users')
+function updateDream(id, changes) {
+    return db('dreams')
     .where({ id })
     .update(changes, '*')
 }
 
-function remove(id) {
-    return db('users')
+function removeDream(id) {
+    return db('dreams')
     .where({ id })
     .del();
 }

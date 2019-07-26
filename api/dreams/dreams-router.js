@@ -52,7 +52,7 @@ function addDream(req, res) { //adds dream to list of dream
 function updateDream(req, res) {
     const {id} = req.params;
 
-    dreamsModel.update(id, req.body)
+    dreamsModel.updateDream(id, req.body)
     .then(dream => {
         res.status(200).json(dream)
     })
@@ -63,8 +63,8 @@ function updateDream(req, res) {
 
 function deleteDream(req, res) {
     const {id} = req.params;
-    
-    dreamsModel.remove(id)
+
+    dreamsModel.removeDream(id)
     .then(dream => {
         res.status(200).json(dream)
     })
