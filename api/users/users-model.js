@@ -28,16 +28,10 @@ function login(username) {
         .first()
 }
 
-async function add(newUser) {
-    const [id] = await db('users').insert(newUser);
-    
-    return findById(id);
-}
 
-function findById(id) {
+function add(newUser) {
     return db('users')
-    .where({ id })
-    .first()
+        .insert(newUser, 'id')
 }
 
 function update(id, changes) {
