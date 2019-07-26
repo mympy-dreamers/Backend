@@ -1,7 +1,7 @@
 const db = require('../../data/dbConfig');
 const bcrypt = require('bcryptjs');
 
-const { update, remove, add, findById, get } = require('./users-model');
+const { update, remove, add, get } = require('./users-model');
 
 describe('users model', () => {
     beforeEach(async () => {
@@ -17,7 +17,7 @@ describe('users model', () => {
             await add({ username: 'thisisnotpatrick', password: bcrypt.hashSync('1', 10), email: 'thisispat@gmail.com' });
             await update(1, { username: 'thisispatrick', password: bcrypt.hashSync('5', 10), email: 'thisispatrick@gmail.com' });
 
-            const user = await findById(1);
+            const user = await get(1);
 
             expect(user.username).toBe('thisispatrick');
             expect(user.password).toBe(bcrypt.hashSync('5', 10));
