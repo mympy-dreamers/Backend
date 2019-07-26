@@ -7,6 +7,8 @@ module.exports = router;
 router.get('/', getDreams)
 router.get('/:id', getDreamById);
 router.post('/', addDream);
+router.put('/:id', updateDream);
+router.delete('/:id', deleteDream);
 
 
 function getDreams(req, res) {  //fetches all dreams in dreams db
@@ -45,5 +47,29 @@ function addDream(req, res) { //adds dream to list of dream
         .catch(error => {
             res.status(500).json(error)
         })
+}
+
+function updateDream(req, res) {
+    const {id} = req.params;
+
+    dreamsModel.update(id, req.body)
+    .then(dream => {
+        res.status(200).json(dream)
+    })
+    .catch(error => {
+        res.status(400).json(error)
+    })
+}
+
+function deleteDream(req, res) {
+    const {id} = req.params;
+    
+    dreamsModel.remove(id)
+    .then(dream => {
+        res.status(200).json(dream)
+    })
+    .catch(error => {
+        res.status(400).json(error)
+    })
 }
 
