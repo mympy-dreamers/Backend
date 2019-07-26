@@ -4,7 +4,7 @@ module.exports = {
     validateDreamId: async (req, res, next) => {
         try {
             const { id } = req.params;
-            const dream = await dreamsDB.get(id);
+            const dream = await dreamsDB.getDreamById(id);
     
             dream 
             ? next()
