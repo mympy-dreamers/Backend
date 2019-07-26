@@ -8,7 +8,7 @@ const session = require("express-session");
 const passport = require("passport");
 const Auth0Strategy = require("passport-auth0");
 var userInViews = require("../middleware/userInViews");
-var authRouters = require("../router/auth");
+var auth0Routers = require("../router/auth");
 var indexRouter = require("../router/index");
 var usersRouter = require("../router/users");
 
@@ -52,14 +52,14 @@ server.use(session(sess));
 server.use(passport.initialize());
 server.use(passport.session());
 server.use(userInViews());
-server.use('/', authRouters);
+server.use('/auth', auth0Routers);
 server.use('/', usersRouter);
 
 if (server.get("env") === "production") {
   sess.cookie.secure = true; // serve secure cookies, requires https
 }
 
-server.use("/auth", authRouter);
+// server.use("/", authRouter);
 server.use("/users", userRouter);
 
 server.get("/", (req, res) => {
