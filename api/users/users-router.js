@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const { validateUserBody, validateUserId } = require('./users-middleware')
 const router = require('express').Router();
 
-const getUsers = async (req, res) => {
+const getUsers = async (req, res) => { //temporary get request I made for testing
   try {
     const users = await Users.get();
 
