@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { validateDreamBody, validateDreamId} = require('./dreams-middleware')
+const { validateDreamBody, validateDreamId } = require('./dreams-middleware')
 const dreamsModel = require('./dreams-model');
 
 module.exports = router;
