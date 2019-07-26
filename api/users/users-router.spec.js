@@ -2,11 +2,12 @@ const supertest = require('supertest');
 const router = require('./users-router');
 
 describe('users router', () => {   
+    
     describe('PUT request to /:id', () => {
         it('should respond with 200 with updated changes', () => {
             const data = { email: 'thisispatrick@gmail.com' }
             supertest(router)
-                .put('/1')
+                .put('/7')
                 .send(data)
                 .expect(200)
                 .expect('Content-Type', /json/i);
@@ -21,7 +22,7 @@ describe('users router', () => {
     describe('DELETE request to /:id', () => {
         it('should respond with 204 no content on success', () => {
             supertest(router)
-                .delete('/3')
+                .delete('/5')
                 .expect(204)
         });
         it('should respond with 404 not found with non-existent id', () => {

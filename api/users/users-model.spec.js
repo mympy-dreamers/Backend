@@ -1,13 +1,14 @@
 const db = require('../../data/dbConfig');
 const bcrypt = require('bcryptjs');
 
-const { update, remove, add, findById } = require('./users-model');
+const { update, remove, add, findById, get } = require('./users-model');
 
 describe('users model', () => {
     beforeEach(async () => {
-        await db('users').truncate();
-      });
-    it('should set environment to testing', () => {
+        await db.raw("TRUNCATE TABLE dreams RESTART IDENTITY CASCADE");
+    });
+
+    it('should set testing env variable', () => {
         expect(process.env.DB_ENV).toBe('testing');
     });
     describe('put request, update()', async () => {
@@ -31,7 +32,7 @@ describe('users model', () => {
 
             await remove(2);
 
-            const users = await find();
+            const users = await get();
             
             expect(users).toHaveLength(2);
         });
