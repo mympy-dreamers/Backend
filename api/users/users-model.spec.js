@@ -7,6 +7,9 @@ describe('users model', () => {
     beforeEach(async () => {
         await db.raw("TRUNCATE TABLE users RESTART IDENTITY CASCADE");
     });
+    afterAll(() => {
+        return knex.seed.run(); 
+      });
 
     it('should set testing env variable', () => {
         expect(process.env.DB_ENV).toBe('testing');
