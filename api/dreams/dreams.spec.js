@@ -66,7 +66,7 @@ describe('dreams model', () => {
             expect(dreams).toHaveLength(3);
         })
 
-        it('should be able to add a dream for multiple users to the dreams db', async () => {
+        it('should be able to add a dream for multiple dreams to the dreams db', async () => {
 
             await addDream({
                 "dream_name": "test_dream",
@@ -137,7 +137,7 @@ describe('dreams model', () => {
                 "user_id": 1
             })
 
-            const dreams = await getDreams() // tests regardless of id of dream
+            const dreams = await getDreams(); // tests regardless of id of dream
 
             expect(dreams).toHaveLength(3)
         })
@@ -163,7 +163,7 @@ describe('dreams model', () => {
             expect(dreamById).toBeTruthy()
         })
     })
-    describe('put request, update()', async () => {
+    describe('put request, updateDream()', async () => {
         it('should return updated content with changes', async () => {
 
             await addDream({ 
@@ -180,6 +180,45 @@ describe('dreams model', () => {
             const dream = await getDreamById(1);
 
             expect(dream.dream_name).toBe('PAAAATRICK');
+        });
+    });
+    describe('delete request, removeDream()', async () => {
+        it('should delete the dream', async () => {
+            await addDream({
+                "dream_name": "test_dream",
+                "dream_short_description": "test test. test test test test test test test test test!",
+                "dream_long_description": "test test. test test test test test test test test test! test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!",
+                "donations_received": 1,
+                "donation_goal": 100,
+                "dreampic": "test_string",
+                "user_id": 1
+            })
+
+            await addDream({
+                "dream_name": "test_dream2",
+                "dream_short_description": "test test. test test test test test test test test test!",
+                "dream_long_description": "test test. test test test test test test test test test! test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!",
+                "donations_received": 1,
+                "donation_goal": 100,
+                "dreampic": "test_string",
+                "user_id": 1
+            })
+
+            await addDream({
+                "dream_name": "test_dream3",
+                "dream_short_description": "test test. test test test test test test test test test!",
+                "dream_long_description": "test test. test test test test test test test test test! test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!test test. test test test test test test test test test!",
+                "donations_received": 1,
+                "donation_goal": 100,
+                "dreampic": "test_string",
+                "user_id": 1
+            })
+
+            await removeDream(2);
+
+            const dreams = await getDreams();
+            
+            expect(dreams).toHaveLength(2);
         });
     });
 
