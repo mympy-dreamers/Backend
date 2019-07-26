@@ -28,7 +28,6 @@ function login(username) {
         .first()
 }
 
-
 function add(newUser) {
     return db('users')
         .insert(newUser, 'id')
