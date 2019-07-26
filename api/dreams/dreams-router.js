@@ -1,14 +1,14 @@
 const router = require('express').Router();
-
+const { validateDreamBody, validateDreamId} = require('./dreams-middleware')
 const dreamsModel = require('./dreams-model');
 
 module.exports = router;
 
 router.get('/', getDreams)
 router.get('/:id', getDreamById);
-router.post('/', addDream);
-router.put('/:id', updateDream);
-router.delete('/:id', deleteDream);
+router.post('/', validateDreamBody,addDream);
+router.put('/:id', validateDreamBody, validateDreamId, updateDream);
+router.delete('/:id', validateDreamId, deleteDream);
 
 
 function getDreams(req, res) {  //fetches all dreams in dreams db
@@ -32,14 +32,14 @@ function getDreamById(req, res) {  //fetches dream by dream id
         })
 }
 
-
+//I added the middleware according to what is notNullable
 function addDream(req, res) { //adds dream to list of dream
-    let { dream_name, dream_short_description, dream_long_description } = req.body // checks to make sure name and both descriptions are added
-    if (!dream_name || !dream_short_description || !dream_long_description) {
-        return res
-            .status(400)
-            .json({ message: 'Please Fill Out All Required Fields' })
-    }
+    // let { dream_name, dream_short_description, dream_long_description } = req.body // checks to make sure name and both descriptions are added
+    // if (!dream_name || !dream_short_description || !dream_long_description) {
+    //     return res
+    //         .status(400)
+    //         .json({ message: 'Please Fill Out All Required Fields' })
+    // }
     dreamsModel.addDream(req.body)
         .then(ids => {
             res.status(200).json(ids)
