@@ -1,16 +1,11 @@
 const db = require('../../data/dbConfig');
 const bcrypt = require('bcryptjs');
-
 const { update, remove, add, get } = require('./users-model');
 
 describe('users model', () => {
     beforeEach(async () => {
         await db.raw("TRUNCATE TABLE users RESTART IDENTITY CASCADE");
     });
-    afterAll(() => {
-        return knex.seed.run(); 
-      });
-
     it('should set testing env variable', () => {
         expect(process.env.DB_ENV).toBe('testing');
     });
