@@ -5,15 +5,12 @@ const bcrypt = require('bcryptjs');
 const { getDreamById, getDreams, addDream, updateDream, removeDream } = require('./dreams-model.js');
 
 describe('dreams model', () => {
+    beforeAll(async () => {
+        await db.seed.run()
+    })
     beforeEach(async () => {
         await db.raw("TRUNCATE TABLE dreams RESTART IDENTITY CASCADE"); // we use the .raw command here because postgres won't truncate the data without it
     });
-    beforeAll(async () => {
-        await usersDB.add({ username: 'mick', password: bcrypt.hashSync('1', 10), email: 'mickissick@gmail.com' });
-        await usersDB.add({ username: 'sick', password: bcrypt.hashSync('1', 10), email: 'butsickismick@gmail.com' });
-        await usersDB.add({ username: 'bick', password: bcrypt.hashSync('1', 10), email: 'andsickaintbick@gmail.com' });
-    });
-      
     it('should set testing env variable', () => {
         expect(process.env.DB_ENV).toBe('testing');
     });
@@ -113,7 +110,6 @@ describe('dreams model', () => {
 
     describe('getDreams()', () => {
         it('should return all dreams in dreams db', async () => {
-
             await addDream({
                 "dream_name": "test_dream",
                 "dream_short_description": "test test. test test test test test test test test test!",
@@ -228,5 +224,4 @@ describe('dreams model', () => {
             expect(dreams).toHaveLength(2);
         });
     });
-
-})
+});
