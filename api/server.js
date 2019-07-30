@@ -11,7 +11,7 @@ server.use(cors());
 server.use(express.json());
 
 server.use("/auth", authRouter);
-server.use("/users", userRouter);
+server.use("/api/users", userRouter);
 server.use("/api/dreams", dreamsRouter);
 server.use('/api/images', imagesRouter)
 
