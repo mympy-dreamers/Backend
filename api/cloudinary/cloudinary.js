@@ -7,7 +7,7 @@ const db = require('../../data/dbConfig.js');
 const server = express.Router();
 
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, // does this need to be as a string
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_SECRET
 });
@@ -39,7 +39,7 @@ server.post('/', multipart, (req, res) => {
                         const image = await db.select().from('mympyImages').where('img_url', result.url).first();
 
 
-                        res.status(201).json({ image }) // ?????second id
+                        res.status(201).json({ image })
                     }
                 }
 
@@ -53,5 +53,5 @@ server.post('/', multipart, (req, res) => {
 
 module.exports = server;
 
-// profile_pic, or make new one for user
+// make copy of this route for user pics
 
