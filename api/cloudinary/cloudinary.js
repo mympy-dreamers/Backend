@@ -7,7 +7,7 @@ const db = require('../../data/dbConfig.js');
 const server = express.Router();
 
 cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, // all api keys, secrets, and cloudnames stored in env
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_SECRET
 });
@@ -22,32 +22,21 @@ server.post('/', multipart, (req, res) => {
             if (error) {
                 res.status(500).json({ message: "Unable to Upload Image" })
             }
-
             else {
-
                 try {
-
                     if (!dream_id) {
-
                         res.status(422).json({ message: "Dream ID is required!" });
-
                     }
-
                     else {
-                        await db.insert({ img_url: result.url, dream_id }).into('mympyImages')
-
+                        await db.insert({ img_url: result.url, dream_id }).into('mympyImages') // inserts cloudinary url into mympyImages db
                         const image = await db.select().from('mympyImages').where('img_url', result.url).first();
-
-
                         res.status(201).json({ image })
                     }
                 }
-
                 catch (err) {
                     res.status(500).json({ message: err });
                 }
             }
-
         })
 })
 
