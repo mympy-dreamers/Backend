@@ -3,7 +3,9 @@ const db = require('../../data/dbConfig');
 module.exports = {
     addDream,
     getDreamById,
-    getDreams
+    getDreams,
+    updateDream,
+    removeDream
 }
 
 function getDreams() {
@@ -27,3 +29,14 @@ function addDream(dream) {
         .insert(dream, 'id')
 }
 
+function updateDream(id, changes) {
+    return db('dreams')
+    .where({ id })
+    .update(changes, '*')
+}
+
+function removeDream(id) {
+    return db('dreams')
+    .where({ id })
+    .del();
+}

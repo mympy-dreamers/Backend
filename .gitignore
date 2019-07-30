@@ -10,3 +10,7 @@ jspm_packages/
 .env.test
 
 yarn.lock
+package-lock.json
+package.json
+*.json
+knexfile.js
