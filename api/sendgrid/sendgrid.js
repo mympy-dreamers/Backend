@@ -1,14 +1,52 @@
 
 require('dotenv').config();
+const db = require('../../data/dbConfig');
+
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-const msg = {
-    to: '(var)',
-    from: 'var',
-    subject: 'Sending with Twilio SendGrid is Fun',
-    text: 'var',
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-};
-sgMail.send(msg);
 
-// 
+
+// model functions
+
+const fromEmailDB = (id) => {
+    return db('users')
+        .select('users.email as fromEmail')
+        .where('users.id', id)
+}
+
+const fromUsernameDB = (id) => {
+    return db('users')
+        .select('users.username')
+        .where('users.id', id)
+}
+
+// Route functions ===========================
+const router = require('express').Router();
+module.exports = router;
+
+router.post('/', sendEmail);
+
+async function sendEmail(req, res) {
+    const { user_id, dreamer_id } = req.body;
+    let toEmail;
+    let fromEmail;
+    let fromUser;
+
+    await fromEmailDB(dreamer_id).then(result => toEmail = (result[0].fromEmail)).catch(err => res.send("toemail err"));
+    await fromEmailDB(user_id).then(result => fromEmail = result[0].fromEmail).catch(err => res.send("fromemail err"));
+    await fromUsernameDB(user_id).then(result => fromUser = result[0].username).catch(err => res.send("fromUser err"));
+
+    try {
+        const msg = {
+            to: toEmail,
+            from: 'mymphydreamers@gmail.com',
+            subject: 'Another Mympy User Wants to Connect With You',
+            text: `From ${fromUser} - wants to contact you, heres their email: ${fromEmail} `,
+        };
+
+        sgMail.send(msg);
+        res.status(200).send("email sent!")
+    } catch (err) {
+        res.status(400).send(err)
+    }
+}
