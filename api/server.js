@@ -5,6 +5,7 @@ const server = express();
 const authRouter = require('./auth/signUp-router.js');
 const userRouter = require('./users/users-router.js');
 const dreamsRouter = require('./dreams/dreams-router')
+const sendEmail = require('./sendgrid/sendgrid.js');
 
 server.use(cors());
 server.use(express.json());
@@ -12,6 +13,7 @@ server.use(express.json());
 server.use("/auth", authRouter);
 server.use("/api/users", userRouter);
 server.use("/api/dreams", dreamsRouter);
+server.use("/mail", sendEmail);
 
 server.get('/', (req, res) => {
     res.status(200).json({ Title: 'Mympy Server Up!' });
