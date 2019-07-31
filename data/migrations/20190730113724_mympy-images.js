@@ -17,7 +17,7 @@ exports.up = function (knex, Promise) {
                 .onDelete("CASCADE")
                 .onUpdate("CASCADE");
         })
-
+    //this is a comment
 };
 
 exports.down = function (knex, Promise) {
