@@ -26,10 +26,6 @@ exports.up = function (knex, Promise) {
         .notNullable()
 
       tbl
-        .varchar("profile_pic")
-        .notNullable()
-
-      tbl
         .integer("user_id")
         .unsigned()
         .notNullable()
