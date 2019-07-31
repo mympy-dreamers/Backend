@@ -18,7 +18,7 @@ exports.up = function (knex, Promise) {
         .notNullable()
         .unique()
     })
-
+    
 };
 
 exports.down = function (knex, Promise) {
