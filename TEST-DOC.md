@@ -48,10 +48,12 @@
 ### Test 4: Tests for an unsuccessful delete request to `/id`
 - Tests a delete request to a non-existent user id, `30`
 - Expects an HTTP response code of 404, not found
+
 <br>
 ___________________________________________________________________________________________
 
 <br>
+
 ## Dreams Model:
 
 - Truncates the Dreams table before each test
