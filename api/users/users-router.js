@@ -16,6 +16,28 @@ const getUsers = async (req, res) => { //temporary get request I made for testin
   }
 }
 
+const getUserById = async (req, res) => {
+  try {
+      const { id } = req.params;
+      const user = await Users.get(id);
+
+      res.status(200).json(user);
+  } catch(err) {
+      res.status(500).json({ success: false, err })
+  }
+}
+
+const getUserDreams = async (req, res) => {
+  try {
+      const {id} = req.params;
+      const userDreams = await Users.getUserDreams(id);
+
+      res.status(200).json(userDreams);
+  } catch (err) {
+      res.status(500).json({ success: false, err });
+  }
+};
+
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -50,9 +72,12 @@ const deleteUser = async (req, res) => {
 
 module.exports = router;
 
-router.delete('/:id', validateUserId, deleteUser)
-router.put('/:id', validateUserBody, validateUserId, updateUser)
 router.get('/', getUsers)
+router.get('/:id', getUserById)
+router.get('/:id/dreams', getUserDreams)
+router.delete('/:id', validateUserId, deleteUser)
+router.put('/:id', validateUserId, updateUser)
+
   
 
 
