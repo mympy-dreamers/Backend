@@ -151,7 +151,7 @@ The list of user objects will output added properties `userInfo` and `dreams`. B
 
 There will be different logic for both types of get requests (for a single user and for all users) due to adding the `dreams` and `userInfo` properties.
 
-### Dreams:
+## Dreams:
 
 #### getDreams()
 
@@ -175,7 +175,7 @@ There will be different logic for both types of get requests (for a single user 
 
 
 
-### Users:
+## Users:
 
 #### getUsers()
 
@@ -204,7 +204,7 @@ There will be different logic for both types of get requests (for a single user 
 
 - deletes specified user object on CASCADE.
 
-### User Infos:
+## User Infos:
 
 #### getUserInfos()
 
