@@ -20,7 +20,10 @@ The following tests covers the existing endpoints for users model, users router 
 ### Test 5: `get(id)`
 - Tests the `get(id)` function by adding a single user,
 - retrieving the user by id,
-- then expecting the result to return the user's username.
+- then expecting the result to:
+    - return the user's username, 
+    - return the dreams property to be truthy
+    - return userInfo as an empty array 
 ### Test 6: `get(id)`
 - Tests the `get(id)` function by adding 3 users,
 - retrieving the third user by id, 
