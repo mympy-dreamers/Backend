@@ -27,6 +27,17 @@ const getUserById = async (req, res) => {
   }
 }
 
+const getUserDreams = async (req, res) => {
+  try {
+      const {id} = req.params;
+      const userDreams = await Users.getUserDreams(id);
+
+      res.status(200).json(userDreams);
+  } catch (err) {
+      res.status(500).json({ success: false, err });
+  }
+};
+
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -63,6 +74,7 @@ module.exports = router;
 
 router.get('/', getUsers)
 router.get('/:id', getUserById)
+router.get('/:id/dreams', getUserDreams)
 router.delete('/:id', validateUserId, deleteUser)
 router.put('/:id', validateUserId, updateUser)
 
