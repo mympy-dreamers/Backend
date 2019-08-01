@@ -2,7 +2,7 @@
 
 ### All tests are created using the ARRANGE, ACT, ASSERT method of testing.
 
-### Coverage: 80%
+### Coverage: 
 
 The following tests covers the existing endpoints for users model, users router (put and delete only), dreams model, and dreams router. There are 30 tests in total. There are 3 unit tests and 1 integration test (dreams model) all have passed successfully as of 7/31/2019.
 
