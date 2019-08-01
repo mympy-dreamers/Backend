@@ -237,7 +237,7 @@ create a .env file that includes the following:
     HOST=localhost
     DB_DEV=mympy
     DB_TEST=mympy_test
-    USER=<YOUR POSTFRES PGADMIN USERNAME> default postgres
+    USER=<YOUR POSTGRES PGADMIN USERNAME> default postgres
     PASS=<YOUR POSTGRES PGADMIN PASSWORD>
     BE_URL=http://localhost:5000
     FE_URL=http://localhost:3000
