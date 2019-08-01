@@ -76,11 +76,16 @@ The following outputs will differ from the post schema previously stated:
 
 ### Users:
 
-`${server}/api/users`
+`/api/users`
 
-#### Notes:
+    {
+      id: INTEGER (PK++),
+      username: VARCHAR 128,
+      password: VARCHAR 128,
+      email: VARCHAR 128
+    }
 
-The list of user objects will output added properties `userInfo` and `dreams`. Both are connected through the associated tables (by joins, foreign keys, and promise logic).
+#### `/api/users/:id`
 
 
 
@@ -111,6 +116,34 @@ The list of user objects will output added properties `userInfo` and `dreams`. B
                 }
               ]
     }
+
+#### `/api/users/:id/dreams`
+
+Shows all the dreams associated with the user id.
+
+i.e. outputs this for `/api/users/2/dreams`:
+
+    {
+            "id": 2,
+            "dream_name": "Save the ocean",
+            "dream_short_description": "Ocean is dying we need to save it",
+            "dream_long_description": "Let save all those rare fish and animals for future generation",
+            "donations_received": 230,
+            "donation_goal": 500,
+            "dreampic": "www.sea.com/fish.jpg",
+            "user_id": 2
+        },
+        {
+            "id": 5,
+            "dream_name": "Better education for Orphans",
+            "dream_short_description": "Better life in future",
+            "dream_long_description": "Not to be involve in crime, drug dealing, killing people",
+            "donations_received": 70,
+            "donation_goal": 800,
+            "dreampic": "www.orphanseducation.com/orphans.com",
+            "user_id": 2
+        }
+
 
 
 ## Dreams Routes:
