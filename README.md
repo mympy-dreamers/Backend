@@ -19,6 +19,22 @@ To get the server running locally:
 - **npm server** to start the local server
 - **npm test** to start server using testing environment
 
+### Authorization
+Auth0 operates a cloud based identity platform for developers. It provides Auth0, a web-scale cloud solution that includes APIs and tools that enable developers to eliminate the friction of authentication and authorization of their applications and APIs.
+
+Auth0 is a Right Solution for Social Authentication because there are a lot of social networkslike Google, Facebook, Twitter. And all these services provide their own systems of authentication.
+
+Benefits of Auth0:
+-  Security
+-  Libraries with a large number of technologies.
+-  Quality API.
+-  A wide range of settings.
+- No need to maintain custume database
+
+
+Auth0's solution works with iOS, Android, and Windows Phone 8 platforms. Its platform is used by large and small enterprises, and startups.
+
+
 ### Backend framework goes here
 
 Accessibility and clarity comes with route specifications, therefore it's easier to have the server route to the following:
