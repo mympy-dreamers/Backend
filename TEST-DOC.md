@@ -49,10 +49,11 @@
 - Tests a delete request to a non-existent user id, `30`
 - Expects an HTTP response code of 404, not found
 
-<br>
-___________________________________________________________________________________________
 
-<br>
+_______________________________________________________________________________________________________
+
+
+
 
 ## Dreams Model:
 
@@ -75,7 +76,7 @@ ________________________________________________________________________________
 - then expecting the result to return an array of 3 dreams.
 ### Test 6: `getDreamById(id)`
 - Tests the `getDreamById(id)` function by adding a dream,
-- retrieving the dream by `getDreamById(1), 
+- retrieving the dream by `getDreamById(1)`, 
 - and expecting the result to be truthy.
 ### Test 7: `updateDream(id)`
 - Tests the `update(id)` function by adding a dream, 
