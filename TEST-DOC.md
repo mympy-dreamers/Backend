@@ -30,6 +30,7 @@
 - then using `delete(id)` to remove the second user, 
 - and using a get request to expect an array of 2.
 
+<br><br>
 
 ## Users Router:
 ### Test 1: Tests for a successful PUT request to `/:id`. 
@@ -48,6 +49,7 @@
 - Tests a delete request to a non-existent user id, `30`
 - Expects an HTTP response code of 404, not found
 
+___________________________________________________________________________________________
 
 ## Dreams Model:
 
@@ -81,5 +83,38 @@
 - then using `removeDream(id)` to remove the second dream, 
 - and using a get request to expect an array of 2.
 
+<br><br>
+
+## Dreams Router
+
+### Test 1: Tests for GET requests. 
+- Tests a get request to `/`
+- Expects an HTTP response code of 200, OK on success
+- Expects the content type to be .json
+- Expects an HTTP response code of 200, OK on `get(id)`
+- Expects previous `get(id)` to be .json
+- Expects an HTTP response code of 404 if id doesn't exist.
+- Expects previous response to be .json
+### Test 2: Tests for POST requests 
+- Sends a new dream object with all required fields through const data
+- Expects an HTTP response code of 201 created
+- Expects the content type to be .json
+- Expects an HTTP response code to be 400 with missing fields
+- Expects the previous response content type to be .json
+### Test 3: Tests for a successful PUT request to `/:id`. 
+- Tests a put request to an existing dream id, `1`
+- Sends newly changed `dream_name` information, through const data
+- Expects an HTTP response code of 200, OK
+- Expects the content type to be .json
+### Test 4: Tests for an unsuccessful PUT request to `/:id`.
+- Tests a put request to a non-existent dream id, `60`
+- Expects an HTTP response code of 404, not found
+- Expects the content type to be .json
+### Test 5: Tests for a successful delete request to `/:id`
+- Tests a delete request to an existing dream, `2`
+- Expects an HTTP response code of 204, no content
+### Test 6: Tests for an unsuccessful delete request to `/id`
+- Tests a delete request to a non-existent dream id, `70`
+- Expects an HTTP response code of 404, not found
 
 
