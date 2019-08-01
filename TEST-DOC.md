@@ -30,7 +30,7 @@
 - then using `delete(id)` to remove the second user, 
 - and using a get request to expect an array of 2.
 
-<br><br>
+<br>
 
 ## Users Router:
 ### Test 1: Tests for a successful PUT request to `/:id`. 
@@ -48,9 +48,10 @@
 ### Test 4: Tests for an unsuccessful delete request to `/id`
 - Tests a delete request to a non-existent user id, `30`
 - Expects an HTTP response code of 404, not found
-
+<br>
 ___________________________________________________________________________________________
 
+<br>
 ## Dreams Model:
 
 - Truncates the Dreams table before each test
@@ -83,7 +84,7 @@ ________________________________________________________________________________
 - then using `removeDream(id)` to remove the second dream, 
 - and using a get request to expect an array of 2.
 
-<br><br>
+<br>
 
 ## Dreams Router
 
