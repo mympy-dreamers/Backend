@@ -19,20 +19,7 @@ To get the server running locally:
 - **npm server** to start the local server
 - **npm test** to start server using testing environment
 
-### Authorization
-Auth0 operates a cloud based identity platform for developers. It provides Auth0, a web-scale cloud solution that includes APIs and tools that enable developers to eliminate the friction of authentication and authorization of their applications and APIs.
 
-Auth0 is a Right Solution for Social Authentication because there are a lot of social networkslike Google, Facebook, Twitter. And all these services provide their own systems of authentication.
-
-Benefits of Auth0:
--  Security
--  Libraries with a large number of technologies.
--  Quality API.
--  A wide range of settings.
-- No need to maintain custume database
-
-
-Auth0's solution works with iOS, Android, and Windows Phone 8 platforms. Its platform is used by large and small enterprises, and startups.
 
 
 ### Backend framework goes here
@@ -152,7 +139,27 @@ The list of user objects will output added properties `userInfo` and `dreams`. B
 | GET    | `/:id          `        | restricted          | Returns info for a single user.                    |
 | GET    | `/:id/dreams          ` | restricted          | Dreams belonging to a specific user.               |
 | PUT    | `/:id`                  | restricted          | Edit a user's information.                         |
-| DELETE | `/:id`                  | restricted          | Delete a user's information.                       |
+| DELETE | `/:id`                  | restricted          | Delete a user's information.   
+
+
+
+### Initiate Google Auth
+
+Method used: [GET] /
+
+On Success: Returns a token to be used to authenticate the user.
+
+Parameters:
+
+Name	Type	Required
+email	string	yes
+Example of what to use:
+
+{
+    email: "testemail@gmail.com",
+}
+
+                   |
 
 
 ## 2️⃣ Actions
@@ -215,6 +222,8 @@ There will be different logic for both types of get requests (for a single user 
 - deletes specified user object on CASCADE.
 
 
+
+
 ## 3️⃣ Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
@@ -269,3 +278,7 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
 🚫 Add DS iOS and/or Andriod links here if applicable.
+
+
+
+
