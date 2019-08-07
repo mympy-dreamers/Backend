@@ -14,6 +14,9 @@ To get the server running locally:
 - **npm run server** to start the local server
 - **npm run test** to start server using testing environment
 
+
+
+
 ### Backend framework goes here
 
 Accessibility and clarity comes with route specifications, therefore it's easier to have the server route to the following:
@@ -164,7 +167,103 @@ i.e. outputs this for `/api/users/2/dreams`:
 | GET    | `/:id          `        | restricted          | Returns all properties for a single user.          |
 | GET    | `/:id/dreams          ` | restricted          | Dreams belonging to a specific user.               |
 | PUT    | `/:id`                  | restricted          | Edit a user's information.                         |
-| DELETE | `/:id`                  | restricted          | Delete a user's information.                       |
+| DELETE | `/:id`                  | restricted          | Delete a user's information.   
+
+
+### Auth0 Authentication and Authorization form Client side
+
+Create an Auth0Client instance before rendering or initializing your application. You should only have one instance of the client.
+
+//with async/await
+const auth0 = await createAuth0Client({
+  domain: '<AUTH0_DOMAIN>',
+  client_id: '<AUTH0_CLIENT_ID>',
+  redirect_uri: '<MY_CALLBACK_URL>'
+});
+
+//with promises
+createAuth0Client({
+  domain: '<AUTH0_DOMAIN>',
+  client_id: '<AUTH0_CLIENT_ID>',
+  redirect_uri: '<MY_CALLBACK_URL>'
+}).then(auth0 => {
+  //...
+});
+
+
+## 1 - Login
+<button id="login">Click to Login</button>
+//with async/await
+
+//redirect to the Universal Login Page
+document.getElementById('login').addEventListener('click', async () => {
+  await auth0.loginWithRedirect();
+});
+
+//in your callback route (<MY_CALLBACK_URL>)
+window.addEventListener('load', async () => {
+  const redirectResult = await auth0.handleRedirectCallback();
+  //logged in. you can get the user profile like this:
+  const user = await auth0.getUser();
+  console.log(user);
+});
+
+
+
+## 2 - Calling an API
+<button id="call-api">Call an API</button>
+//with async/await
+document.getElementById('call-api').addEventListener('click', async () => {
+  const accessToken = await auth0.getTokenSilently();
+  const result = await fetch('https://myapi.com', {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+  const data = await result.json();
+  console.log(data);
+});
+
+//with promises
+document.getElementById('call-api').addEventListener('click', () => {
+  auth0
+    .getTokenSilently()
+    .then(accessToken =>
+      fetch('https://myapi.com', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      })
+    )
+    .then(result => result.json())
+    .then(data => {
+      console.log(data);
+    });
+});
+
+
+## 3 - Logout
+<button id="logout">Logout</button>
+import createAuth0Client from '@auth0/auth0-spa-js';
+
+document.getElementById('logout').addEventListener('click', () => {
+  auth0.logout();
+});
+
+
+## About Auth0
+
+-Helps to implement authentication with multiple identity providers, including social (e.g., Google, Facebook, Microsoft, LinkedIn, GitHub, Twitter, etc), or enterprise (e.g., Windows Azure AD, Google Apps, Active Directory, ADFS, SAML, etc.)
+
+-log in users with username/password databases, passwordless, or multi-factor authentication
+link multiple user accounts together
+
+Helps to generate signed JSON Web Tokens to authorize your API calls and flow the user identity securely
+
+Helps to access demographics and analytics detailing how, when, and where users are logging in
+enrich user profiles from other data sources using customizable JavaScript rules
 
 ## User Info Routes:
 
@@ -260,6 +359,8 @@ There will be different logic for both types of get requests (for a single user 
 - Deletes the user's profile.
 
 
+
+
 ## 3️⃣ Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
@@ -315,4 +416,5 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 ## Documentation
 
 See [https://github.com/mympy-dreamers/Frontend]  for details on the frontend of our project.
+
 
