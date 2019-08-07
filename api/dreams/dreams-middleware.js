@@ -15,9 +15,9 @@ module.exports = {
         }
     },
     validateDreamBody: (req, res, next) => {
-        const { dream_name, dream_short_description, donations_received, user_id } = req.body;
+        const { dream_name, dream_short_description, user_id } = req.body;
     
-        dream_name && dream_short_description && donations_received && user_id
+        dream_name && dream_short_description && user_id
         ? next()
         : res.status(400).json({message: 'Missing required fields.'})
     }   
