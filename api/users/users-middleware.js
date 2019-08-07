@@ -8,10 +8,10 @@ module.exports = {
     
             user 
             ? next()
-            : res.status(400).json({message: 'invalid id'});  
+            : res.status(400).json({ message: 'invalid id' });  
             
         } catch(err) {
-            res.status(404).json({message: 'cannot find user id'});
+            res.status(500).json({ message: 'cannot retrieve user id' });
         }
     },
     validateUserBody: (req, res, next) => {

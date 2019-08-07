@@ -1,12 +1,7 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
 # API Documentation
 
-#### 1️⃣ Backend deployed at [🚫name service here](🚫add URL here) <br>
+#### 1️⃣ Backend deployed at [https://mympy-dreamers-staging.herokuapp.com/]
 
 ## 1️⃣ Getting started
 
@@ -16,8 +11,8 @@ To get the server running locally:
 
 - Clone this repo
 - **npm install** to install all required dependencies
-- **npm server** to start the local server
-- **npm test** to start server using testing environment
+- **npm run server** to start the local server
+- **npm run test** to start server using testing environment
 
 
 
@@ -31,16 +26,12 @@ Accessibility and clarity comes with route specifications, therefore it's easier
 The following are required fields in order to successfully POST to specified urls:
 
 ### Dreams:
-/////a
 
-
+`/api/dreams`
 
 #### Notes:
 
 `dreampic` requires additional logic and research (cloudinary) to be able to add images to the database.
-
-`${server}/api/dreams`
-
 
     {
       id: INTEGER (PK++),
@@ -54,7 +45,11 @@ The following are required fields in order to successfully POST to specified url
 
 ### Users:
 
-`${server}/api/users`
+#### Notes:
+
+Login and Signup is taken care by 0auth. Profile picture uploads are taken care of by cloudinary. Email messaging system is taken care of by sendgrid.
+
+`/api/users`
 
     {
       id: INTEGER (PK++),
@@ -63,7 +58,7 @@ The following are required fields in order to successfully POST to specified url
       email: VARCHAR 128
     }
 
-`${server}/api/user-info`
+`/api/user-info`
 
 ### User Info:
 
@@ -84,11 +79,16 @@ The following outputs will differ from the post schema previously stated:
 
 ### Users:
 
-`${server}/api/users`
+`/api/users`
 
-#### Notes:
+    {
+      id: INTEGER (PK++),
+      username: VARCHAR 128,
+      password: VARCHAR 128,
+      email: VARCHAR 128
+    }
 
-The list of user objects will output added properties `userInfo` and `dreams`. Both are connected through the associated tables (by joins, foreign keys, and promise logic).
+#### `/api/users/:id`
 
 
 
@@ -120,23 +120,51 @@ The list of user objects will output added properties `userInfo` and `dreams`. B
               ]
     }
 
+#### `/api/users/:id/dreams`
 
-#### Dreams Routes
+Shows all the dreams associated with the user id.
+
+i.e. outputs this for `/api/users/2/dreams`:
+
+    {
+            "id": 2,
+            "dream_name": "Save the ocean",
+            "dream_short_description": "Ocean is dying we need to save it",
+            "dream_long_description": "Let save all those rare fish and animals for future generation",
+            "donations_received": 230,
+            "donation_goal": 500,
+            "dreampic": "www.sea.com/fish.jpg",
+            "user_id": 2
+        },
+        {
+            "id": 5,
+            "dream_name": "Better education for Orphans",
+            "dream_short_description": "Better life in future",
+            "dream_long_description": "Not to be involve in crime, drug dealing, killing people",
+            "donations_received": 70,
+            "donation_goal": 800,
+            "dreampic": "www.orphanseducation.com/orphans.com",
+            "user_id": 2
+        }
+
+
+
+## Dreams Routes:
 
 | Method | Endpoint                | Access Control | Description                          |
 | ------ | ----------------------- | -------------- | -------------------------------------|
 | GET    | `/`                     | all users      | Returns info for all dream projects. |
-| GET    | `/:id`                  | all users      | Returns info for a dream project.    |
+| GET    | `/:id`                  | all users      | Returns info for a dream project pertaining to an id.    |
 | PUT    | `/:id`                  | restricted     | Modify an existing dream project.    |
 | DELETE | `/:id`                  | restricted     | Delete a dream.                      |
 | POST   | `/`                     | restricted     | Post a new dream project.            |
 
-#### User Routes
+## User Routes:
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/`                     | restricted          | Returns all users for an dream.             |
-| GET    | `/:id          `        | restricted          | Returns info for a single user.                    |
+| GET    | `/`                     | restricted          | Returns all users for a user.                      |
+| GET    | `/:id          `        | restricted          | Returns all properties for a single user.          |
 | GET    | `/:id/dreams          ` | restricted          | Dreams belonging to a specific user.               |
 | PUT    | `/:id`                  | restricted          | Edit a user's information.                         |
 | DELETE | `/:id`                  | restricted          | Delete a user's information.   
@@ -237,6 +265,17 @@ Helps to generate signed JSON Web Tokens to authorize your API calls and flow th
 Helps to access demographics and analytics detailing how, when, and where users are logging in
 enrich user profiles from other data sources using customizable JavaScript rules
 
+## User Info Routes:
+
+| Method | Endpoint                | Access Control      | Description                                        |
+| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| GET    | `/`                     | restricted          | Returns all user profiles.                         |
+| GET    | `/:id          `        | restricted          | Returns info for a single user.                    |
+| POST   | `/`                     | restricted          | Post a new user profile.                           |
+| PUT    | `/:id`                  | restricted          | Edit a user's profile.                             |
+| DELETE | `/:id`                  | restricted          | Delete a user's profile.                           |
+
+
 
 ## 2️⃣ Actions
 
@@ -244,15 +283,15 @@ enrich user profiles from other data sources using customizable JavaScript rules
 
 There will be different logic for both types of get requests (for a single user and for all users) due to adding the `dreams` and `userInfo` properties.
 
-### Dreams:
+## Dreams:
 
 #### getDreams()
 
 - Returns all dreams
 
-#### getDream(id)
+#### getDreamById(id)
 
-- Returns a single dream by ID
+- Returns dreams pertaining to an ID.
 
 #### addDream(dream)
 
@@ -268,7 +307,7 @@ There will be different logic for both types of get requests (for a single user 
 
 
 
-### Users:
+## Users:
 
 #### getUsers()
 
@@ -297,6 +336,28 @@ There will be different logic for both types of get requests (for a single user 
 
 - deletes specified user object on CASCADE.
 
+## User Infos:
+
+#### getUserInfos()
+
+- Get all user profiles.
+
+#### getUserInfo(id)
+
+- Get the profile of a single user.
+
+#### addUserInfo(id)
+
+- Adds a new profile.
+
+#### editUserInfo(id)
+
+- Edits user profile
+
+#### deleteUserInfo(id)
+
+- Deletes the user's profile.
+
 
 
 
@@ -305,14 +366,16 @@ There will be different logic for both types of get requests (for a single user 
 In order for the app to function correctly, the user must set up their own environment variables.
 
 create a .env file that includes the following:
-
-🚫 These are just examples, replace them with the specifics for your app
     
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
-    *  NODE_ENV - set to "development" until ready for "production"
-    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
-    *  SENDGRID_API_KEY - this is generated in your Sendgrid account
-    *  stripe_secret - this is generated in the Stripe dashboard
+    PORT=5000//whatever port
+    HOST=localhost
+    DB_DEV=mympy
+    DB_TEST=mympy_test
+    USER=<YOUR POSTGRES PGADMIN USERNAME> default postgres
+    PASS=<YOUR POSTGRES PGADMIN PASSWORD>
+    BE_URL=http://localhost:5000
+    FE_URL=http://localhost:3000
+    DB_ENV=testing
     
 ## Contributing
 
@@ -352,9 +415,6 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
-
-
+See [https://github.com/mympy-dreamers/Frontend]  for details on the frontend of our project.
 
 

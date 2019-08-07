@@ -5,19 +5,48 @@ module.exports = {
     add,
     login,
     remove,
-    update
+    update,
+    getUserDreams,
+    getUserInfo
 }
 
 function get(id) {
-    let query = db('users');
-
+    let users = db('users');
+  
     if (id) {
-        return query
-            .where('id', id)
-            .first()
+      users.where({ id }).first();
+  
+      const promises = [users, this.getUserDreams(id), this.getUserInfo(id)]; 
+  
+      return Promise.all(promises).then(results => {
+        let [user, dreams, userInfo] = results;
+  
+        if (user) {
+            user.dreams = dreams;
+            user.userInfo = userInfo;
+        
+            return user
+          } else {
+            return null;
+          }
+        });
     }
+  
+    return users
+}
 
-    return query;
+function getUserDreams(id) {
+    let query = db('dreams')
+        .where('user_id', id)
+
+    return query
+}
+
+function getUserInfo(id) {
+    let query = db('userInfo')
+        .where('user_id', id)
+
+    return query
 }
 
 function login(username) {
