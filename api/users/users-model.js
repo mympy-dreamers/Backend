@@ -45,6 +45,7 @@ function getUserDreams(id) {
 function getUserInfo(id) {
     let query = db('userInfo')
         .where('user_id', id)
+        .first()
 
     return query
 }
