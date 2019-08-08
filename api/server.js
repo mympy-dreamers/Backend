@@ -5,6 +5,7 @@ const server = express();
 const authRouter = require('./auth/signUp-router.js');
 const userRouter = require('./users/users-router.js');
 const dreamsRouter = require('./dreams/dreams-router');
+const userInfoRouter = require('./userInfo/userInfo-router')
 const sendEmail = require('./sendgrid/sendgrid.js');
 const imagesRouter = require('./cloudinary/cloudinary');
 
@@ -14,6 +15,7 @@ server.use(express.json());
 server.use("/auth", authRouter);
 server.use("/api/users", userRouter);
 server.use("/api/dreams", dreamsRouter);
+server.use("/api/userInfo", userInfoRouter);
 server.use("/mail", sendEmail);
 server.use('/api/images', imagesRouter)
 
