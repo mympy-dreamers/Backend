@@ -10,9 +10,9 @@ module.exports = {
 
 function getDreams() {
     return db('dreams')
-    .join('mympyImages', 'dream_id', 'dreams.id')
-    .join('users', 'user_id', 'users.id')
-    .select('dreams.dream_name', 'dreams.dream_short_description', 'dreams.donation_goal', 'dreams.donations_received', 'users.username', 'mympyImages.img_url')
+        .join('mympyImages', 'dream_id', 'dreams.id')
+        .join('users', 'user_id', 'users.id')
+        .select('dreams.id', 'dreams.dream_name', 'dreams.dream_short_description', 'dreams.donation_goal', 'dreams.donations_received', 'users.username', 'mympyImages.img_url')
 }
 
 function getDreamById(id) {
@@ -34,12 +34,12 @@ function addDream(dream) {
 
 function updateDream(id, changes) {
     return db('dreams')
-    .where({ id })
-    .update(changes, '*')
+        .where({ id })
+        .update(changes, '*')
 }
 
 function removeDream(id) {
     return db('dreams')
-    .where({ id })
-    .del();
+        .where({ id })
+        .del();
 }
