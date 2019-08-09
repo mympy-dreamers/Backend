@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-
+//this is a comment
 exports.seed = function (knex, Promise) {
   const users = [
     { auth_id: 'google-auth0|900000000001', username: 'admin', password: bcrypt.hashSync('123', 10), email: 'raj@example.com' },
