@@ -7,32 +7,41 @@ module.exports = {
     remove,
     update,
     getUserDreams,
-    getUserInfo
+    getUserInfo,
+    getAuthId
 }
 
 function get(id) {
     let users = db('users');
-  
+
     if (id) {
-      users.where({ id }).first();
-  
-      const promises = [users, this.getUserDreams(id), this.getUserInfo(id)]; 
-  
-      return Promise.all(promises).then(results => {
-        let [user, dreams, userInfo] = results;
-  
-        if (user) {
-            user.dreams = dreams;
-            user.userInfo = userInfo;
-        
-            return user
-          } else {
-            return null;
-          }
+        users.where({ id }).first();
+
+        const promises = [users, this.getUserDreams(id), this.getUserInfo(id)];
+
+        return Promise.all(promises).then(results => {
+            let [user, dreams, userInfo] = results;
+
+            if (user) {
+                user.dreams = dreams;
+                user.userInfo = userInfo;
+
+                return user
+            } else {
+                return null;
+            }
         });
     }
-  
+
     return users
+}
+
+function getAuthId(auth_id) {
+    let query = db('users')
+        .where({ auth_id })
+        .first();
+
+    return query
 }
 
 function getUserDreams(id) {
@@ -59,17 +68,18 @@ function login(username) {
 
 function add(newUser) {
     return db('users')
-        .insert(newUser, 'id')
+        .insert(newUser)
+        .returning("*");
 }
 
 function update(id, changes) {
     return db('users')
-    .where({ id })
-    .update(changes, '*')
+        .where({ id })
+        .update(changes, '*')
 }
 
 function remove(id) {
     return db('users')
-    .where({ id })
-    .del();
+        .where({ id })
+        .del();
 }
