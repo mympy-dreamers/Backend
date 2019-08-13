@@ -6,7 +6,6 @@ exports.seed = function (knex, Promise) {
       dream_long_description: "Get make the biggest camping ever",
       donations_received: 400,
       donation_goal: 1000,
-      dreampic: "www.camping.com/camp.jpg",
       user_id: 3
     },
     {
@@ -15,16 +14,14 @@ exports.seed = function (knex, Promise) {
       dream_long_description: "Let save all those rare fish and animals for future generation",
       donations_received: 230,
       donation_goal: 500,
-      dreampic: "www.sea.com/fish.jpg",
       user_id: 2
     },
     {
       dream_name: "abc",
       dream_short_description: "test",
       dream_long_description: "testing",
-      donations_received: 20,
+      donations_received: 0,
       donation_goal: 100,
-      dreampic: "www.abc.com/abc.jpg",
       user_id: 4
     },
 
@@ -34,7 +31,6 @@ exports.seed = function (knex, Promise) {
       dream_long_description: "Let save all those for future generation",
       donations_received: 40,
       donation_goal: 500,
-      dreampic: "www.elephant.com/elephant.jpg",
       user_id: 7
     },
 
@@ -44,7 +40,6 @@ exports.seed = function (knex, Promise) {
       dream_long_description: "Not to be involve in crime, drug dealing, killing people",
       donations_received: 70,
       donation_goal: 800,
-      dreampic: "www.orphanseducation.com/orphans.com",
       user_id: 2
     },
 
@@ -54,9 +49,8 @@ exports.seed = function (knex, Promise) {
       dream_long_description: "Let save all those for fresh air",
       donations_received: 20,
       donation_goal: 100,
-      dreampic: "www.savetrees.com/trees.jpg",
       user_id: 7
-    
+
     },
 
     {
@@ -65,7 +59,6 @@ exports.seed = function (knex, Promise) {
       dream_long_description: "Beware of drugs",
       donations_received: 30,
       donation_goal: 150,
-      dreampic: "www.drugs.com/drugs.com",
       user_id: 8
     },
 
@@ -75,7 +68,6 @@ exports.seed = function (knex, Promise) {
       dream_long_description: "We can collect the money and provide them good food",
       donations_received: 20,
       donation_goal: 100,
-      dreampic: "www.helphomeless.com/homeless.png",
       user_id: 1
     },
 
@@ -85,7 +77,6 @@ exports.seed = function (knex, Promise) {
       dream_long_description: "This fund is used for homeless and orphanages",
       donations_received: 20,
       donation_goal: 300,
-      dreampic: "www.bdr.com/bdr.png",
       user_id: 6
     },
 
@@ -95,7 +86,6 @@ exports.seed = function (knex, Promise) {
       dream_long_description: " Helping people who are poor and have cancer",
       donations_received: 20,
       donation_goal: 100,
-      dreampic: "www.fundforcancer.com/cancer.png",
       user_id: 9
     },
 
