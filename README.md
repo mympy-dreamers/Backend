@@ -43,6 +43,20 @@ The following are required fields in order to successfully POST to specified url
       dreampic: VARCHAR
     }
 
+### Cloudinary
+
+Company Website: https://www.cloudinary.com/	
+
+Cloudinary is a service that allows users to store and retrieve images for use on websites. Our application uses a back-end implementation of cloudinary whereby the image is uploaded to cloudinary and the subsequent URL that is served up by the service is stored in a database along with the project id with which it is associated. On the front-end, the URL for the image is retrieved from the database and used as background image for each project using string interpolation. 
+
+`/api/images` is the endpoint that accesses the 'mympyImages' table which returns data in the following shape:
+
+  {
+    "id": Primary key,
+    "img_url": string,
+    "dream_id": foreign key referencing dreams.id
+  }
+
 ### Users:
 
 #### Notes:
