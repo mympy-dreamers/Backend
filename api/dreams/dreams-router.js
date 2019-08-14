@@ -26,7 +26,13 @@ function getDreamById(req, res) {  //fetches dream by dream id
     const id = req.params.id;
     dreamsModel.getDreamById(id)
         .then(dream => {
-            res.status(200).json(dream)
+            dreamsModel.getImageById(id)
+                .then(image => {
+                    res.status(200).json({...dream, dream_pic: image})
+                })
+                .catch(error => {
+                    res.status(400).json(error)
+                })
         })
         .catch(error => {
             res.status(400).json(error)
