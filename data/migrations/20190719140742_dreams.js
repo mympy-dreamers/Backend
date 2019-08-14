@@ -18,14 +18,11 @@ exports.up = function (knex, Promise) {
         .text("dream_long_description")
 
       tbl
-        .integer("donations_received", 128)
-        .notNullable()
+        .integer("donations_received")
+
       tbl
         .integer("donation_goal")
         .notNullable()
-
-      tbl
-        .varchar("dreampic")
 
       tbl
         .integer("user_id")
