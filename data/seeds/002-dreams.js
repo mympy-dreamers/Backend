@@ -98,9 +98,6 @@ exports.seed = function (knex, Promise) {
       dreampic: "www.fundforcancer.com/cancer.png",
       user_id: 9
     },
-
-
-
   ]
 
   return (

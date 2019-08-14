@@ -6,6 +6,7 @@ module.exports = router;
 
 router.get('/', getDreams)
 router.get('/:id', getDreamById);
+router.get('/image/:id', getImageById);
 router.post('/', validateDreamBody, addDream);
 router.put('/:id', validateDreamId, updateDream);
 router.delete('/:id', validateDreamId, deleteDream);
@@ -26,6 +27,17 @@ function getDreamById(req, res) {  //fetches dream by dream id
     dreamsModel.getDreamById(id)
         .then(dream => {
             res.status(200).json(dream)
+        })
+        .catch(error => {
+            res.status(400).json(error)
+        })
+}
+
+function getImageById(req, res) {  //fetches dream by dream id
+    const dream_id = req.params.id;
+    dreamsModel.getImageById(dream_id)
+        .then(image => {
+            res.status(200).json(image)
         })
         .catch(error => {
             res.status(400).json(error)
