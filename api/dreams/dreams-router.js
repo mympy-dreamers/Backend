@@ -17,7 +17,7 @@ function getDreams(req, res) {  //fetches all dreams in dreams db
             res.status(200).json(dreams)
         })
         .catch(error => {
-            res.status(400).json(error)
+            res.status(400).json({ error, msg: 'Could not get from dreams database' })
         })
 }
 
@@ -28,20 +28,23 @@ function getDreamById(req, res) {  //fetches dream by dream id
             res.status(200).json(dream)
         })
         .catch(error => {
-            res.status(400).json(error)
+            res.status(400).json({ error, msg: 'Failed to grab dream by Id' })
         })
 }
 
 //I added the middleware according to what is notNullable
 function addDream(req, res) {
+    const newDream = req.body;
 
-    dreamsModel.addDream(req.body)
+    dreamsModel.addDream(newDream)
         .then(ids => {
             res.status(200).json(ids)
         })
         .catch(error => {
-            res.status(500).json(error)
+            res.status(500).json({ error, msg: 'Failed to add Dream to the database' })
         })
+
+
 }
 
 function updateDream(req, res) {
@@ -52,7 +55,7 @@ function updateDream(req, res) {
             res.status(200).json(dream)
         })
         .catch(error => {
-            res.status(400).json(error)
+            res.status(400).json({ error, msg: "falied to update Dream" })
         })
 }
 
@@ -64,7 +67,7 @@ function deleteDream(req, res) {
             res.status(200).json(dream)
         })
         .catch(error => {
-            res.status(400).json(error)
+            res.status(400).json({ error, msg: 'Failed to delete Dream' })
         })
 }
 
