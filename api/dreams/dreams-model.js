@@ -5,7 +5,8 @@ module.exports = {
     getDreamById,
     getDreams,
     updateDream,
-    removeDream
+    removeDream,
+    getImageById
 }
 
 function getDreams() {
@@ -25,6 +26,12 @@ function getDreamById(id) {
     }
 
     return query;
+}
+
+function getImageById(dream_id) {
+    let query = db('mympyImages');
+        return query
+            .where('dream_id', dream_id)
 }
 
 function addDream(dream) {

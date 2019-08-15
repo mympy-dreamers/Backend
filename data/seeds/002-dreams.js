@@ -88,9 +88,6 @@ exports.seed = function (knex, Promise) {
       donation_goal: 100,
       user_id: 9
     },
-
-
-
   ]
 
   return (
