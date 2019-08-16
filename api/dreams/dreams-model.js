@@ -6,7 +6,8 @@ module.exports = {
     getDreams,
     updateDream,
     removeDream,
-    getImageById
+    getImageById,
+    UDImageFetch
 }
 
 function getDreams() {
@@ -32,6 +33,13 @@ function getImageById(dream_id) {
     let query = db('mympyImages');
         return query
             .where('dream_id', dream_id)
+}
+
+function UDImageFetch(dream_id) {
+    let query = db('mympyImages');
+        return query
+            .where('dream_id', dream_id)
+            .first()
 }
 
 function addDream(dream) {
