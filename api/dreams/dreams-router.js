@@ -62,16 +62,22 @@ function addDream(req, res) {
         })
 }
 
-function updateDream(req, res) {
-    const { id } = req.params;
+async function updateDream(req, res) {
+    try{
+        const { id } = req.params;
+        const updateDream = await dreamsModel.updateDream(id, req.body);
 
-    dreamsModel.updateDream(id, req.body)
-        .then(([dream]) => {
-            res.status(200).json(dream)
-        })
-        .catch(error => {
-            res.status(400).json(error)
-        })
+        if(updateDream){
+            const updatedDream = await dreamsModel.getDreamById(id);
+            const dreamImage = await dreamsModel.UDImageFetch(id);
+
+            res.status(200).json({ ...updatedDream, img_url: dreamImage.img_url }) 
+        } else {
+            res.status(404).json({ message: 'missing required fields' })
+        } 
+    } catch(err) {
+        res.status(500).json({ success: false, err })
+    }
 }
 
 function deleteDream(req, res) {
