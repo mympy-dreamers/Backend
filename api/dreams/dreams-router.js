@@ -6,6 +6,7 @@ module.exports = router;
 
 router.get('/', getDreams)
 router.get('/:id', getDreamById);
+router.get('/image/:id', getImageById);
 router.post('/', validateDreamBody, addDream);
 router.put('/:id', validateDreamId, updateDream);
 router.delete('/:id', validateDreamId, deleteDream);
@@ -25,7 +26,24 @@ function getDreamById(req, res) {  //fetches dream by dream id
     const id = req.params.id;
     dreamsModel.getDreamById(id)
         .then(dream => {
-            res.status(200).json(dream)
+            dreamsModel.getImageById(id)
+                .then(image => {
+                    res.status(200).json({ ...dream, dream_pic: image })
+                })
+                .catch(error => {
+                    res.status(400).json(error)
+                })
+        })
+        .catch(error => {
+            res.status(400).json(error)
+        })
+}
+
+function getImageById(req, res) {  //fetches dream by dream id
+    const dream_id = req.params.id;
+    dreamsModel.getImageById(dream_id)
+        .then(image => {
+            res.status(200).json(image)
         })
         .catch(error => {
             res.status(400).json({ error, msg: 'Failed to grab dream by Id' })
@@ -47,16 +65,22 @@ function addDream(req, res) {
 
 }
 
-function updateDream(req, res) {
-    const { id } = req.params;
+async function updateDream(req, res) {
+    try {
+        const { id } = req.params;
+        const updateDream = await dreamsModel.updateDream(id, req.body);
 
-    dreamsModel.updateDream(id, req.body)
-        .then(([dream]) => {
-            res.status(200).json(dream)
-        })
-        .catch(error => {
-            res.status(400).json({ error, msg: "falied to update Dream" })
-        })
+        if (updateDream) {
+            const updatedDream = await dreamsModel.getDreamById(id);
+            const dreamImage = await dreamsModel.UDImageFetch(id);
+
+            res.status(200).json({ ...updatedDream, img_url: dreamImage.img_url })
+        } else {
+            res.status(404).json({ message: 'missing required fields' })
+        }
+    } catch (err) {
+        res.status(500).json({ success: false, err })
+    }
 }
 
 function deleteDream(req, res) {

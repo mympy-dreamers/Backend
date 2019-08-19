@@ -47,6 +47,10 @@ function getAuthId(auth_id) {
 function getUserDreams(id) {
     let query = db('dreams')
         .where('user_id', id)
+        .join('mympyImages', 'dream_id', 'dreams.id')
+        .select('dreams.id', 'dreams.dream_name', 'dreams.dream_short_description', 'dreams.dream_long_description', 'dreams.donation_goal', 'dreams.donations_received', 'mympyImages.img_url')
+        
+        
 
     return query
 }
