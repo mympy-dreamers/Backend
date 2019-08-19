@@ -17,7 +17,7 @@ function login(req, res) {
             }).catch(err => {
                 res.status(500).json({
                     err: err.message,
-                    error: 'Could not find user'
+                    error: 'Could not find user by id'
                 });
             })
         }).catch(err => {
@@ -34,22 +34,27 @@ function login(req, res) {
 function register(req, res) {
     let user = req.body
 
-    db.add(user)
-        .then(user => {
-            db.get(user[0].id).then((user) => {
-                res.status(200).json(user);
-            }).catch(err => {
+    if (user.username && user.email && user.auth_id) {
+        db.add(user)
+            .then(user => {
+                db.get(user[0].id).then((user) => {
+                    res.status(200).json(user);
+                }).catch(err => {
+                    res.status(500).json({
+                        err: err.message,
+                        error: 'Could not find user'
+                    });
+                })
+            })
+            .catch(err => {
                 res.status(500).json({
                     err: err.message,
-                    error: 'Could not find user'
+                    error: 'Could not create the new user'
                 });
-            })
-        })
-        .catch(err => {
-            res.status(500).json({
-                err: err.message,
-                error: 'Could not create the new user'
             });
-        });
+    } else {
+        res.status(500).json({ msg: 'Missing required fields for creating a user' });
+    }
+
 }
 

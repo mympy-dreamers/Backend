@@ -18,7 +18,7 @@ function getDreams(req, res) {  //fetches all dreams in dreams db
             res.status(200).json(dreams)
         })
         .catch(error => {
-            res.status(400).json(error)
+            res.status(400).json({ error, msg: 'Could not get from dreams database' })
         })
 }
 
@@ -28,7 +28,7 @@ function getDreamById(req, res) {  //fetches dream by dream id
         .then(dream => {
             dreamsModel.getImageById(id)
                 .then(image => {
-                    res.status(200).json({...dream, dream_pic: image})
+                    res.status(200).json({ ...dream, dream_pic: image })
                 })
                 .catch(error => {
                     res.status(400).json(error)
@@ -46,36 +46,39 @@ function getImageById(req, res) {  //fetches dream by dream id
             res.status(200).json(image)
         })
         .catch(error => {
-            res.status(400).json(error)
+            res.status(400).json({ error, msg: 'Failed to grab dream by Id' })
         })
 }
 
 //I added the middleware according to what is notNullable
 function addDream(req, res) {
+    const newDream = req.body;
 
-    dreamsModel.addDream(req.body)
+    dreamsModel.addDream(newDream)
         .then(ids => {
             res.status(200).json(ids)
         })
         .catch(error => {
-            res.status(500).json(error)
+            res.status(500).json({ error, msg: 'Failed to add Dream to the database' })
         })
+
+
 }
 
 async function updateDream(req, res) {
-    try{
+    try {
         const { id } = req.params;
         const updateDream = await dreamsModel.updateDream(id, req.body);
 
-        if(updateDream){
+        if (updateDream) {
             const updatedDream = await dreamsModel.getDreamById(id);
             const dreamImage = await dreamsModel.UDImageFetch(id);
 
-            res.status(200).json({ ...updatedDream, img_url: dreamImage.img_url }) 
+            res.status(200).json({ ...updatedDream, img_url: dreamImage.img_url })
         } else {
             res.status(404).json({ message: 'missing required fields' })
-        } 
-    } catch(err) {
+        }
+    } catch (err) {
         res.status(500).json({ success: false, err })
     }
 }
@@ -88,7 +91,7 @@ function deleteDream(req, res) {
             res.status(200).json(dream)
         })
         .catch(error => {
-            res.status(400).json(error)
+            res.status(400).json({ error, msg: 'Failed to delete Dream' })
         })
 }
 
