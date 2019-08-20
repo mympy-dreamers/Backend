@@ -7,8 +7,7 @@ module.exports = {
     update,
     remove,
     findDream,
-    findUser,
-    getDreamJournals
+    findUser
 }
 
 function find() {
