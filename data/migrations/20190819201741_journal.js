@@ -19,7 +19,6 @@ exports.up = knex =>
         .inTable("users")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-
     tbl
         .integer("dream_id")
         .unsigned()
