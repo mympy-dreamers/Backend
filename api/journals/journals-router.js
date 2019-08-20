@@ -1,10 +1,12 @@
 const express = require('express');
 const Journals = require('./journals-model')
 const router = express.Router();
+const { validateUserID, validateDreamID, validateJournalBody, validateJournalID } = require('./journals-middleware');
+
 
 router.get('/', getJournals)
-router.get('/:id', getJournalById);
-router.post('/', addJournal);
+router.get('/:id', validateJournalID, getJournalById);
+router.post('/', validateJournalBody, addJournal);
 router.put('/:id', updateJournal);
 router.delete('/:id', deleteJournal);
 
@@ -17,7 +19,6 @@ async function getJournals(req, res){
         res.status(500).json({ success: false, err, msg: 'Failed to retrieve the journals database' });
     }
 }
-
 
 async function getJournalById(req, res){
     try {
@@ -36,7 +37,7 @@ async function addJournal(req, res){
 
         res.status(201).json(newJournal);
     } catch(err) {
-        res.status(500).json({ success: false, err,msg: 'Failed to add the journal.' });
+        res.status(500).json({ success: false, err, msg: 'Failed to add the journal.' });
     }
 }
 
@@ -64,7 +65,5 @@ async function deleteJournal(req, res){
          res.status(500).json({ success: false, err, msg: 'Failed to delete the journal.' });
     }
 }
-
-
 
 module.exports = router;
