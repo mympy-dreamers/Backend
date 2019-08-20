@@ -2,7 +2,8 @@
 exports.up = function (knex, Promise) {
     return knex.schema
         .createTable("journals", tbl => {
-            tbl.increments()
+            tbl.increments();
+            table.timestamps();
 
             tbl
                 .string("title", 128)
@@ -11,12 +12,6 @@ exports.up = function (knex, Promise) {
                 tbl
                 .text("body")
                 .notNullable()
-
-                tbl
-                .date("date")
-                .notNullable()
-               
-
 
             tbl
                 .integer("user_id")
