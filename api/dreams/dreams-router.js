@@ -7,6 +7,7 @@ module.exports = router;
 router.get('/', getDreams)
 router.get('/:id', getDreamById);
 router.get('/image/:id', getImageById);
+router.get('/:id/journals', getDreamJournals);
 router.post('/', validateDreamBody, addDream);
 router.put('/:id', validateDreamId, updateDream);
 router.delete('/:id', validateDreamId, deleteDream);
@@ -39,6 +40,7 @@ function getDreamById(req, res) {  //fetches dream by dream id
         })
 }
 
+
 function getImageById(req, res) {  //fetches dream by dream id
     const dream_id = req.params.id;
     dreamsModel.getImageById(dream_id)
@@ -50,7 +52,21 @@ function getImageById(req, res) {  //fetches dream by dream id
         })
 }
 
-//I added the middleware according to what is notNullable
+async function getDreamJournals(req, res){
+    try {
+        const { id } = req.params;
+        const dreamJournals = await dreamsModel.getDreamJournals(id);
+
+        dreamJournals
+        ? res.status(200).json(dreamJournals)
+        : rest.status(400).json({ msg: 'The action failed.'})
+        
+    } catch(err) {
+        res.status(500).json({ success: false, err, msg: 'Failed to retrieve the journals of your dream' });
+    }
+}
+
+
 function addDream(req, res) {
     const newDream = req.body;
 
@@ -61,8 +77,6 @@ function addDream(req, res) {
         .catch(error => {
             res.status(500).json({ error, msg: 'Failed to add Dream to the database' })
         })
-
-
 }
 
 async function updateDream(req, res) {
