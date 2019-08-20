@@ -6,8 +6,8 @@ const { validateUserID, validateDreamID, validateJournalBody, validateJournalID 
 
 router.get('/', getJournals)
 router.get('/:id', validateJournalID, getJournalById);
-router.post('/', validateJournalBody, addJournal);
-router.put('/:id', updateJournal);
+router.post('/', validateUserID, validateDreamID, validateJournalBody, addJournal);
+router.put('/:id', validateUserID, validateDreamID, updateJournal);
 router.delete('/:id', deleteJournal);
 
 async function getJournals(req, res){
