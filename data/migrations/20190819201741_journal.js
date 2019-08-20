@@ -3,7 +3,7 @@ exports.up = function (knex, Promise) {
     return knex.schema
         .createTable("journals", tbl => {
             tbl.increments();
-            table.timestamps();
+            tbl.timestamps();
 
             tbl
                 .string("title", 128)
