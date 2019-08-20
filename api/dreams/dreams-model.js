@@ -4,6 +4,7 @@ module.exports = {
     addDream,
     getDreamById,
     getDreams,
+    getDreamJournals,
     updateDream,
     removeDream,
     getImageById,
@@ -11,10 +12,12 @@ module.exports = {
 }
 
 function getDreams() {
-    return db('dreams')
+    let query = db('dreams')
         .join('mympyImages', 'dream_id', 'dreams.id')
         .join('users', 'user_id', 'users.id')
         .select('dreams.id', 'dreams.dream_name', 'dreams.dream_short_description', 'dreams.donation_goal', 'dreams.donations_received', 'users.username', 'mympyImages.img_url')
+
+    return query
 }
 
 function getDreamById(id) {
@@ -27,6 +30,13 @@ function getDreamById(id) {
     }
 
     return query;
+}
+
+function getDreamJournals(id){
+    let query = db('journals')
+        .where('dream_id', id)
+    
+    return query
 }
 
 function getImageById(dream_id) {
