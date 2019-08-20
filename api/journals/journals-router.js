@@ -1,5 +1,5 @@
 const express = require('express');
-const journalsDB = require('./journals-model')
+const Journals = require('./journals-model')
 const router = express.Router();
 
 router.get('/', getJournals)
@@ -10,7 +10,7 @@ router.delete('/:id', deleteJournal);
 
 async function getJournals(req, res){
     try {
-        const journals = await journalsDB.find();
+        const journals = await Journals.find();
 
         res.status(200).json(journals);
     } catch(err) {
@@ -22,7 +22,7 @@ async function getJournals(req, res){
 async function getJournalById(req, res){
     try {
         const {id} = req.params;
-        const journal = await journalsDB.findById(id);
+        const journal = await Journals.findById(id);
 
         res.status(200).json(journal);
     } catch(err) {
@@ -32,7 +32,7 @@ async function getJournalById(req, res){
 
 async function addJournal(req, res){
     try {
-        const newJournal = await journalsDB.add(req.body);
+        const newJournal = await Journals.add(req.body);
 
         res.status(201).json(newJournal);
     } catch(err) {
@@ -43,7 +43,7 @@ async function addJournal(req, res){
 async function updateJournal (req, res){
     try {
         const {id} = req.params;
-        const updateJournal = await journalsDB.update(id, req.body);
+        const updateJournal = await Journals.update(id, req.body);
 
         updateJournal
         ? res.status(200).json({ message: 'successfully updated journal' })
@@ -56,7 +56,7 @@ async function updateJournal (req, res){
 async function deleteJournal(req, res){
     try {
         const {id} = req.params;
-        const success = await journalsDB.remove(id);
+        const success = await Journals.remove(id);
 
         success ?
          res.status(204).end() : res.status(404).end();
