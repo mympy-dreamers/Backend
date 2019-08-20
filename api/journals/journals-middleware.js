@@ -16,7 +16,7 @@ module.exports = {
     },
     validateUserID: async (req, res, next) => {
         try {
-            const { user_id } = req.params;
+            const { user_id } = req.body;
             const user = await Journals.findUser(user_id);
 
             user
@@ -29,7 +29,7 @@ module.exports = {
     },
     validateDreamID: async (req, res, next) => {
         try {
-            const { dream_id } = req.params;
+            const { dream_id } = req.body;
             const dream = await Journals.findDream(dream_id);
 
             dream
