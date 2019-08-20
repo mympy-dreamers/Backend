@@ -5,7 +5,10 @@ module.exports = {
     findById,
     add,
     update,
-    remove
+    remove,
+    findDream,
+    findUser,
+    getDreamJournals
 }
 
 function find() {
@@ -18,10 +21,10 @@ function findById(id) {
     .first()
 }
 
-async function add(journal) {
-    const [id] = await db('journals').insert(journal);
-
-    return findById(id);
+function add(journal) {
+    return db('journals')
+        .insert(journal)
+        .returning("*");
 }
 
 function update(id, changes) {
@@ -34,4 +37,14 @@ function remove(id) {
     return db('journals')
     .where({ id })
     .del();
+}
+
+function findUser(id) {
+    return db('users')
+    .where({ id })
+}
+
+function findDream(id){
+    return db('dreams')
+    .where({ id })
 }
