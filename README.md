@@ -87,6 +87,39 @@ Login and Signup is taken care by 0auth. Profile picture uploads are taken care 
       user_id: INTEGER (FK)
     }
 
+### ADDITIONS:
+- GET `/api/journals`  You can get the list of journals here.
+- GET  `/api/journals/:id`  You can get a specified journal here.
+- GET  `/api/dreams/:id/journals`  You can the journals belonging to a dream.
+- ADD `/api/journals`  You can add a journal.
+- UPDATE  `/api/journals/:id`  You can update a journal with timestamps on creation and edits.
+- DELETE  `/api/journals/id` You can delete a journal.
+
+
+### Journal Schema:
+```
+ {
+        "id": 16,
+        "title": "Journal Entry UPDATED 2",
+        "body": "Journal Body",
+        "user_id": 25,
+        "dream_id": 11
+}
+```
+### Journal Retrieval:
+```
+{
+    "id": 16,
+    "created_at": "2019-08-20T18:40:52.552Z",
+    "updated_at": "2019-08-20T20:04:41.342Z",
+    "title": "Journal Entry UPDATED 2",
+    "body": "Journal Body",
+    "user_id": 25,
+    "dream_id": 11
+}
+```
+
+
 ## GET Endpoints
 
 The following outputs will differ from the post schema previously stated:
