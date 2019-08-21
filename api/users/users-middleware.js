@@ -8,7 +8,7 @@ module.exports = {
     
             user 
             ? next()
-            : res.status(400).json({ message: 'invalid id' });  
+            : res.status(400).json({ message: 'invalid user id' });  
             
         } catch(err) {
             res.status(500).json({ message: 'cannot retrieve user id' });
