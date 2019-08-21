@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const db = require("../users/users-model.js");
-const auth0Wrapper = require("./react-auth0-wrapper.js");
 
 module.exports = router;
 
