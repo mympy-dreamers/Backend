@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { validateDreamBody, validateDreamId } = require('./dreams-middleware')
 const dreamsPaymentModel = require('./dream-payment-model');
 
 module.exports = router;
