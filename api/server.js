@@ -3,6 +3,7 @@ const cors = require('cors');
 const server = express();
 
 const authRouter = require('./auth/signUp-router.js');
+const authZeroConfig = require('./auth/auth0-config-router.js')
 const authZeroRouter = require('./auth/auth0-router');
 const userRouter = require('./users/users-router.js');
 const dreamsRouter = require('./dreams/dreams-router');
@@ -20,6 +21,7 @@ server.use("/api/journals", journalsRouter);
 server.use("/mail", sendEmail);
 server.use('/api/images', imagesRouter)
 server.use('/auth/zero', authZeroRouter);
+server.use('/auth/config', authZeroConfig);
 
 server.get('/', (req, res) => {
     res.status(200).json({ Title: 'Mympy Server Up!' });
