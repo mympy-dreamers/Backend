@@ -5,7 +5,6 @@ module.exports = router;
 
 router.post('/register', register);
 router.post('/login', login);
-router.get('/getAuth', getAuth);
 
 function login(req, res) {
     const { auth_id } = req.body
@@ -57,11 +56,3 @@ function register(req, res) {
     }
 
 }
-
-// function getAuth(req, res) {
-//     let user = req.body
-//     console.log(auth0Wrapper)
-//     res.status(500).json({ auth0Wrapper })
-
-// }
-

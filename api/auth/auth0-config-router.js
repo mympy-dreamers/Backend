@@ -8,7 +8,7 @@ module.exports = router;
 // Set up Auth0 configuration
 const authConfig = {
     domain: "mympy-dreamer.auth0.com",
-    audience: "YOUR_API_IDENTIFIER"
+    audience: "https://mympy-dreamer.auth0.com/api/v2/"
 };
 
 // Define middleware that validates incoming bearer tokens
