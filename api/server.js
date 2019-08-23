@@ -27,8 +27,8 @@ server.use("/mail", sendEmail);
 server.use('/api/images', imagesRouter)
 server.use('/auth/zero', authZeroRouter);
 server.use('/stripe', stripeRouter);
-server.use('./dreampayment', dreamPaymentRouter);
-server.use('./userpayment', userPaymentRouter);
+server.use('/dreampayment', dreamPaymentRouter);
+server.use('/userpayment', userPaymentRouter);
 
 server.get('/', (req, res) => {
     res.status(200).json({ Title: 'Mympy Server Up!' });
