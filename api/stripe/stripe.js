@@ -4,18 +4,17 @@ const multipart = require("connect-multiparty")();
 const server = express.Router();
 
 server.post("/charge", async (req, res) => {
-	console.log(req.body);
+	const { token, amount } = req.body;
   try {
     let {status} = await stripe.charges.create({
-      amount: 2000,
+      amount: amount*100,
       currency: "usd",
       description: "An example charge",
-      source: req.body
+      source: token
     });
-    console.log(status);
     res.json({status});
   } catch (err) {
-    res.status(500).json({err});
+    res.status(500).json({err}).end();
   }
 });
 
