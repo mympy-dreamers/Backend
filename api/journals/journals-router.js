@@ -10,59 +10,69 @@ router.post('/', validateUserID, validateDreamID, validateJournalBody, addJourna
 router.put('/:id', validateUserID, validateDreamID, updateJournal);
 router.delete('/:id', deleteJournal);
 
-async function getJournals(req, res){
+//Retrieves all journals from journals table
+
+async function getJournals(req, res) {
     try {
         const journals = await Journals.find();
 
         res.status(200).json(journals);
-    } catch(err) {
+    } catch (err) {
         res.status(500).json({ success: false, err, msg: 'Failed to retrieve the journals database' });
     }
 }
 
-async function getJournalById(req, res){
+//Retrieves a single journal by journal id
+
+async function getJournalById(req, res) {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const journal = await Journals.findById(id);
 
         res.status(200).json(journal);
-    } catch(err) {
+    } catch (err) {
         res.status(500).json({ success: false, err, msg: 'Failed to retrieve the specified journal' });
     }
 }
 
-async function addJournal(req, res){
+//Posts to journals table
+
+async function addJournal(req, res) {
     try {
         const newJournal = await Journals.add(req.body);
 
         res.status(201).json(newJournal);
-    } catch(err) {
+    } catch (err) {
         res.status(500).json({ success: false, err, msg: 'Failed to add the journal.' });
     }
 }
 
-async function updateJournal (req, res){
+//Does a put request to a single journal using journal id
+
+async function updateJournal(req, res) {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const updateJournal = await Journals.update(id, req.body);
 
         updateJournal
-        ? res.status(200).json({ message: 'successfully updated journal' })
-        : res.status(404).json({ message: 'journal not found'})
-    } catch(err) {
+            ? res.status(200).json({ message: 'successfully updated journal' })
+            : res.status(404).json({ message: 'journal not found' })
+    } catch (err) {
         res.status(500).json({ success: false, err, msg: 'Failed to update the journal.' });
     }
 }
 
-async function deleteJournal(req, res){
+//Deletes a single journal from journals table using journal id
+
+async function deleteJournal(req, res) {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const success = await Journals.remove(id);
 
         success ?
-         res.status(204).end() : res.status(404).end();
-    }  catch(err) {
-         res.status(500).json({ success: false, err, msg: 'Failed to delete the journal.' });
+            res.status(204).end() : res.status(404).end();
+    } catch (err) {
+        res.status(500).json({ success: false, err, msg: 'Failed to delete the journal.' });
     }
 }
 
