@@ -16,6 +16,12 @@ exports.up = knex =>
             .onDelete("CASCADE")
             .onUpdate("CASCADE");
 
+        tbl
+           .string("user_name", 128)
+           .notNullable()
+
+        tbl
+           .string("img_url", 128)
     })
 
 
