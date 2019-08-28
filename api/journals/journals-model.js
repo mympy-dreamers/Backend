@@ -28,8 +28,7 @@ function findById(id) {
 
 function add(journal) {
     return db('journals')
-        .insert(journal)
-        .returning("*");
+        .insert(journal, '*')
 }
 
 //Updates a single journal
