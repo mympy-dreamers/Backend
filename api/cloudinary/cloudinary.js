@@ -16,7 +16,7 @@ server.post('/', multipart, (req, res) => {
 
     const { dream_id } = req.body;
 
-    cloudinary.v2.uploader.upload(
+    cloudinary.v2.uploader.upload( //uploads image to cloudinary
         req.files.image.path,
         async function (error, result) {
             if (error) {
@@ -28,7 +28,7 @@ server.post('/', multipart, (req, res) => {
                         res.status(422).json({ message: "Dream ID is required!" });
                     }
                     else {
-                        await db.insert({ img_url: result.url, dream_id }).into('mympyImages') // inserts cloudinary url into mympyImages db
+                        await db.insert({ img_url: result.url, dream_id }).into('mympyImages') // inserts cloudinary url obtained from upload into mympyImages db
                         const image = await db.select().from('mympyImages').where('img_url', result.url).first();
                         res.status(201).json({ image })
                     }
