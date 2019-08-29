@@ -195,10 +195,32 @@ i.e. outputs this for `/api/users/2/dreams`:
         }
 
 
+## Authentication routes:
 
-## Dreams Routes:
+**`/auth/zero`**
 
-`/api/dreams`
+| Method | Endpoint                | Access Control      | Description                                        |
+| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| POST   | `/register`             | restricted          | Registers a new user with auth0.                   |
+| POST   | `/login`                | restricted          | Signs in a user with auth0.                        |
+
+
+## User Routes:
+
+**`/api/users`**
+
+| Method | Endpoint                | Access Control      | Description                                        |
+| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| GET    | `/`                     | restricted          | Returns all users for a user.                      |
+| GET    | `/:id `                 | restricted          | Returns all properties for a single user.          |
+| GET    | `/:id/dreams`           | restricted          | Dreams belonging to a specific user.               |
+| PUT    | `/:id`                  | restricted          | Edit a user's information.                         |
+| DELETE | `/:id`                  | restricted          | Delete a user's information.                       |
+
+
+## Dream Routes:
+
+**`/api/dreams`**
 
 | Method | Endpoint                | Access Control | Description                          |
 | ------ | ----------------------- | -------------- | -------------------------------------|
@@ -210,22 +232,9 @@ i.e. outputs this for `/api/users/2/dreams`:
 | DELETE | `/:id`                  | restricted     | Delete a dream.                      |
 
 
-## User Routes:
-
-`/api/users`
-
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/`                     | restricted          | Returns all users for a user.                      |
-| GET    | `/:id `                 | restricted          | Returns all properties for a single user.          |
-| GET    | `/:id/dreams`           | restricted          | Dreams belonging to a specific user.               |
-| PUT    | `/:id`                  | restricted          | Edit a user's information.                         |
-| DELETE | `/:id`                  | restricted          | Delete a user's information.                       |
-
-
 ## Journal Routes:
 
-`/api/journals`
+**`/api/journals`**
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
@@ -237,13 +246,55 @@ i.e. outputs this for `/api/users/2/dreams`:
 
 ## Payment Routes:
 
+#### Notes: 
+
+The route to start the transaction is through **`/stripe/charge`**. Susequently, the app posts to both:
+
+:one: The **`userpayment`** table to track each user's transaction.
+:two: the **`dream-payment`** table to track each dream's transaction.
+
+Therefore, overall, you send a post request to **`/stripe/charge`** which will then post to userpayment and dream-payment.
+
+
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| POST   | `/stripe/charge`        | All Users           | Initial route that starts the payment transactions.|
 | GET    | `/userpayment/:id`      | All Users           | Returns a specified user's payment transaction.    |
 | POST   | `/userpayment`          | All Users           | Posts a new user payment.                          |
 | GET    | `/dreampayment/:id`     | All Users           | Returns a specified dream's payment transaction.   |
 | POST   | `/userpayment`          | All Users           | Posts a new dream payment transaction.             |
 
+
+## Images route:
+
+**`/api/images`**
+
+#### Notes:
+
+:one: A post request to `/api/images` actually sends a request to the third party api cloudinary. We pass in the image and the `dream_id`.
+:two: Cloudinary uploads and saves the image and returns an object that has the url of the image, which we select as `result.url`.
+:three: We insert `result.url` inside the column of `img_url`, and the id of the dream inside `dream_id`, into the table **mympyImages**.
+
+| Method | Endpoint                | Access Control      | Description                                        |
+| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| POST   | `/`                     | All Users           | Posts a new image into the database.               |
+
+
+## Email route:
+
+**`/mail`**
+
+#### Notes:
+
+:one: A post request to `/mail` passes in the `user_id` and `dream_id.`
+:two: The route takes the ids and grabs the user's email and puts it in the sender/receiver field of the email.
+:three: The receiver (owner of the dream) gets this email in their inbox:
+
+    'Another Mympy User Wants to Connect With You'
+
+| Method | Endpoint                | Access Control      | Description                                        |
+| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| POST   | `/`                     | All Users           | Sends an email to the dream's owner saying they want to contact them.               |
 
 
 
