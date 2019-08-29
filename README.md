@@ -262,7 +262,7 @@ Therefore, overall, you send a post request to **`/stripe/charge`** which will t
 | GET    | `/userpayment/:id`      | All Users           | Returns a specified user's payment transaction.    |
 | POST   | `/userpayment`          | All Users           | Posts a new user payment.                          |
 | GET    | `/dreampayment/:id`     | All Users           | Returns a specified dream's payment transaction.   |
-| POST   | `/userpayment`          | All Users           | Posts a new dream payment transaction.             |
+| POST   | `/dreampayment`         | All Users           | Posts a new dream payment transaction.             |
 
 
 ## Images route:
