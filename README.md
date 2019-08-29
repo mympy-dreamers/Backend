@@ -290,7 +290,7 @@ Therefore, overall, you send a post request to **`/stripe/charge`** which will t
 - :two: The route takes the ids and grabs the user's email and puts it in the sender/receiver field of the email.
 - :three: The receiver (owner of the dream) gets this email in their inbox:
 
-    'Another Mympy User Wants to Connect With You'
+        'Another Mympy User Wants to Connect With You'
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
