@@ -251,7 +251,7 @@ i.e. outputs this for `/api/users/2/dreams`:
 The route to start the transaction is through **`/stripe/charge`**. Susequently, the app posts to both:
 
 - :one: The **`userpayment`** table to track each user's transaction.
-- :two: the **`dream-payment`** table to track each dream's transaction.
+- :two: The **`dream-payment`** table to track each dream's transaction.
 
 Therefore, overall, you send a post request to **`/stripe/charge`** which will then post to userpayment and dream-payment.
 
@@ -271,9 +271,9 @@ Therefore, overall, you send a post request to **`/stripe/charge`** which will t
 
 #### Notes:
 
-:one: A post request to `/api/images` actually sends a request to the third party api cloudinary. We pass in the image and the `dream_id`.
-:two: Cloudinary uploads and saves the image and returns an object that has the url of the image, which we select as `result.url`.
-:three: We insert `result.url` inside the column of `img_url`, and the id of the dream inside `dream_id`, into the table **mympyImages**.
+- :one: A post request to `/api/images` actually sends a request to the third party api cloudinary. We pass in the image and the `dream_id`.
+- :two: Cloudinary uploads and saves the image and returns an object that has the url of the image, which we select as `result.url`.
+- :three: We insert `result.url` inside the column of `img_url`, and the id of the dream inside `dream_id`, into the table **mympyImages**.
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
@@ -286,9 +286,9 @@ Therefore, overall, you send a post request to **`/stripe/charge`** which will t
 
 #### Notes:
 
-:one: A post request to `/mail` passes in the `user_id` and `dream_id.`
-:two: The route takes the ids and grabs the user's email and puts it in the sender/receiver field of the email.
-:three: The receiver (owner of the dream) gets this email in their inbox:
+- :one: A post request to `/mail` passes in the `user_id` and `dream_id.`
+- :two: The route takes the ids and grabs the user's email and puts it in the sender/receiver field of the email.
+- :three: The receiver (owner of the dream) gets this email in their inbox:
 
     'Another Mympy User Wants to Connect With You'
 
