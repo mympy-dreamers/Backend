@@ -7,6 +7,7 @@ module.exports = router;
 router.post('/', addUserPayment);
 router.get('/:id', getUserPayments);
 
+//Posts the user payment infomration to the user-payment table
 
 function addUserPayment(req, res) {
     const newUserPayment = req.body;
@@ -19,6 +20,8 @@ function addUserPayment(req, res) {
             res.status(500).json({ error, msg: 'Failed to add Payment to the database' })
         })
 }
+
+//Retrieves payment information for a single user by using the user_id
 
 function getUserPayments(req, res) {
     const user_id = req.params.id;

@@ -4,6 +4,9 @@ const dreamsModel = require('./dreams-model');
 
 module.exports = router;
 
+
+//all endpoints are found below and begin with api/dreams
+
 router.get('/', getDreams)
 router.get('/:id', getDreamById);
 router.get('/image/:id', getImageById);
@@ -12,8 +15,9 @@ router.post('/', validateDreamBody, addDream);
 router.put('/:id', validateDreamId, updateDream);
 router.delete('/:id', validateDreamId, deleteDream);
 
+//Fetches all dreams in dreams db
 
-function getDreams(req, res) {  //fetches all dreams in dreams db
+function getDreams(req, res) {
     dreamsModel.getDreams()
         .then(dreams => {
             res.status(200).json(dreams)
@@ -23,7 +27,9 @@ function getDreams(req, res) {  //fetches all dreams in dreams db
         })
 }
 
-function getDreamById(req, res) {  //fetches dream by dream id
+//Fetches dream by dream id
+
+function getDreamById(req, res) {
     const id = req.params.id;
     dreamsModel.getDreamById(id)
         .then(dream => {
@@ -40,8 +46,9 @@ function getDreamById(req, res) {  //fetches dream by dream id
         })
 }
 
+//Fetches dream by dream id
 
-function getImageById(req, res) {  //fetches dream by dream id
+function getImageById(req, res) {
     const dream_id = req.params.id;
     dreamsModel.getImageById(dream_id)
         .then(image => {
@@ -52,20 +59,23 @@ function getImageById(req, res) {  //fetches dream by dream id
         })
 }
 
-async function getDreamJournals(req, res){
+//Retrieves journals associated with a single dream by using the dream_id
+
+async function getDreamJournals(req, res) {
     try {
         const { id } = req.params;
         const dreamJournals = await dreamsModel.getDreamJournals(id);
 
         dreamJournals
-        ? res.status(200).json(dreamJournals)
-        : rest.status(400).json({ msg: 'The action failed.'})
-        
-    } catch(err) {
+            ? res.status(200).json(dreamJournals)
+            : rest.status(400).json({ msg: 'The action failed.' })
+
+    } catch (err) {
         res.status(500).json({ success: false, err, msg: 'Failed to retrieve the journals of your dream' });
     }
 }
 
+// Makes a post to the dreams table
 
 function addDream(req, res) {
     const newDream = req.body;
@@ -78,6 +88,8 @@ function addDream(req, res) {
             res.status(500).json({ error, msg: 'Failed to add Dream to the database' })
         })
 }
+
+//Updates information about a dream
 
 async function updateDream(req, res) {
     try {
@@ -96,6 +108,8 @@ async function updateDream(req, res) {
         res.status(500).json({ success: false, err })
     }
 }
+
+//Removes dream from dreams table
 
 function deleteDream(req, res) {
     const { id } = req.params;

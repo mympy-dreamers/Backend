@@ -1,5 +1,7 @@
 const dreamsDB = require('./dreams-model');
 
+//Vaidates the dream id when dreams are updated and deleted using a dream id
+
 module.exports = {
     validateDreamId: async (req, res, next) => {
         try {
@@ -23,3 +25,5 @@ module.exports = {
             : res.status(400).json({ message: 'Dreams Require a User Id.' })
     }
 }
+
+//makes sure that all required fields are filled when when dream is posted
