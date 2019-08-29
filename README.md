@@ -197,7 +197,7 @@ i.e. outputs this for `/api/users/2/dreams`:
 
 ## Authentication routes:
 
-**`/auth/zero`**
+### **`/auth/zero`**
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
@@ -207,7 +207,7 @@ i.e. outputs this for `/api/users/2/dreams`:
 
 ## User Routes:
 
-**`/api/users`**
+### **`/api/users`**
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
@@ -220,7 +220,7 @@ i.e. outputs this for `/api/users/2/dreams`:
 
 ## Dream Routes:
 
-**`/api/dreams`**
+### **`/api/dreams`**
 
 | Method | Endpoint                | Access Control | Description                          |
 | ------ | ----------------------- | -------------- | -------------------------------------|
@@ -234,7 +234,7 @@ i.e. outputs this for `/api/users/2/dreams`:
 
 ## Journal Routes:
 
-**`/api/journals`**
+### **`/api/journals`**
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
@@ -267,7 +267,7 @@ Therefore, overall, you send a post request to **`/stripe/charge`** which will t
 
 ## Images route:
 
-**`/api/images`**
+### **`/api/images`**
 
 #### Notes:
 
@@ -282,7 +282,7 @@ Therefore, overall, you send a post request to **`/stripe/charge`** which will t
 
 ## Email route:
 
-**`/mail`**
+### **`/mail`**
 
 #### Notes:
 
