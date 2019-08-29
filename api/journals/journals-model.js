@@ -40,9 +40,11 @@ function remove(id) {
 function findUser(id) {
     return db('users')
     .where({ id })
+    .first()
 }
 
 function findDream(id){
     return db('dreams')
     .where({ id })
+    .first()
 }
