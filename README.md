@@ -201,8 +201,8 @@ i.e. outputs this for `/api/users/2/dreams`:
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| POST   | `/register`             | restricted          | Registers a new user with auth0.                   |
-| POST   | `/login`                | restricted          | Signs in a user with auth0.                        |
+| POST   | `/register`             | all users           | Registers a new user with auth0.                   |
+| POST   | `/login`                | all users           | Signs in a user with auth0.                        |
 
 
 ## User Routes:
@@ -250,8 +250,8 @@ i.e. outputs this for `/api/users/2/dreams`:
 
 The route to start the transaction is through **`/stripe/charge`**. Susequently, the app posts to both:
 
-:one: The **`userpayment`** table to track each user's transaction.
-:two: the **`dream-payment`** table to track each dream's transaction.
+- :one: The **`userpayment`** table to track each user's transaction.
+- :two: the **`dream-payment`** table to track each dream's transaction.
 
 Therefore, overall, you send a post request to **`/stripe/charge`** which will then post to userpayment and dream-payment.
 
