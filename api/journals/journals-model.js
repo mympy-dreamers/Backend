@@ -52,6 +52,7 @@ function remove(id) {
 function findUser(id) {
     return db('users')
         .where({ id })
+        .first()
 }
 
 //Returns information on a single dream by dream id
@@ -59,4 +60,5 @@ function findUser(id) {
 function findDream(id) {
     return db('dreams')
         .where({ id })
+        .first()
 }
