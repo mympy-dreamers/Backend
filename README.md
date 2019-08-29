@@ -198,23 +198,53 @@ i.e. outputs this for `/api/users/2/dreams`:
 
 ## Dreams Routes:
 
+`/api/dreams`
+
 | Method | Endpoint                | Access Control | Description                          |
 | ------ | ----------------------- | -------------- | -------------------------------------|
 | GET    | `/`                     | all users      | Returns info for all dream projects. |
-| GET    | `/:id`                  | all users      | Returns info for a dream project pertaining to an id.    |
+| GET    | `/:id`                  | all users      | Returns info for a dream project pertaining to an id. |
+| GET    | `/:id/journals`         | all users      | Returns all journals pertaining to a dream project. |
+| POST   | `/`                     | restricted     | Post a new dream project.            |
 | PUT    | `/:id`                  | restricted     | Modify an existing dream project.    |
 | DELETE | `/:id`                  | restricted     | Delete a dream.                      |
-| POST   | `/`                     | restricted     | Post a new dream project.            |
+
 
 ## User Routes:
+
+`/api/users`
 
 | Method | Endpoint                | Access Control      | Description                                        |
 | ------ | ----------------------- | ------------------- | -------------------------------------------------- |
 | GET    | `/`                     | restricted          | Returns all users for a user.                      |
-| GET    | `/:id          `        | restricted          | Returns all properties for a single user.          |
-| GET    | `/:id/dreams          ` | restricted          | Dreams belonging to a specific user.               |
+| GET    | `/:id `                 | restricted          | Returns all properties for a single user.          |
+| GET    | `/:id/dreams`           | restricted          | Dreams belonging to a specific user.               |
 | PUT    | `/:id`                  | restricted          | Edit a user's information.                         |
-| DELETE | `/:id`                  | restricted          | Delete a user's information.   
+| DELETE | `/:id`                  | restricted          | Delete a user's information.                       |
+
+
+## Journal Routes:
+
+`/api/journals`
+
+| Method | Endpoint                | Access Control      | Description                                        |
+| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| GET    | `/`                     | All Users           | Returns all journals for a user.                   |
+| GET    | `/:id`                  | All Users           | Returns all properties for a single journal.       |
+| POST   | `/`                     | restricted          | Posts a new journal entry.                         |
+| PUT    | `/:id`                  | restricted          | Edits a journal's body.                            |
+| DELETE | `/:id`                  | restricted          | Delete a user's information.                       |
+
+## Payment Routes:
+
+| Method | Endpoint                | Access Control      | Description                                        |
+| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
+| GET    | `/userpayment/:id`      | All Users           | Returns a specified user's payment transaction.    |
+| POST   | `/userpayment`          | All Users           | Posts a new user payment.                          |
+| GET    | `/dreampayment/:id`     | All Users           | Returns a specified dream's payment transaction.   |
+| POST   | `/userpayment`          | All Users           | Posts a new dream payment transaction.             |
+
+
 
 
 ### Auth0 Authentication and Authorization form Client side
